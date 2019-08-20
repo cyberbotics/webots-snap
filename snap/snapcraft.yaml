@@ -25,6 +25,7 @@ parts:
   webots:
     build-packages:
       - git
+      - wget
       - g++
       - cmake
       - libusb-dev
@@ -55,7 +56,6 @@ parts:
       - python3.7-dev
       - openjdk-8-jdk
       - curl
-      - wget
     # See 'snapcraft plugins'
     plugin: make
     build-environment:
