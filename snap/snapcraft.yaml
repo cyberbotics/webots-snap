@@ -26,6 +26,7 @@ parts:
     build-packages:
       - git
       - wget
+      - lsb-release
       - g++
       - cmake
       - libusb-dev
