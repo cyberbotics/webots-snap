@@ -13,7 +13,7 @@ description: |
   of the ODE physics engine. The robot controller programs can be written
   outside of Webots in C, C++, Python, ROS, Java or MATLAB using a simple API.
   Webots features a 3D web interface allowing you to publish simulations online.
-icon: resources/icons/core/webots.png
+icon: webots.png
 license: Apache-2.0
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
