@@ -54,6 +54,7 @@ parts:
       - libxml2-dev
       - libzip-dev
       - libzzip-0-13
+      - lsb-release
       - npm
       - openjdk-8-jdk
       - pbzip2
@@ -63,6 +64,7 @@ parts:
       - python3.7-dev
       - swig
       - unzip
+      - wget
     # See 'snapcraft plugins'
     plugin: make
     build-environment:
