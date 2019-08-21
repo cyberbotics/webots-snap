@@ -47,13 +47,14 @@ parts:
       - libpci-dev
       - libpng-dev
       - libreadline-dev
-      - libssh-dev
-      - libssl-dev
+      - libssh--gcrypt-dev
+      - libssl1.0-dev
       - libtiff5-dev
       - libusb-dev
       - libxml2-dev
       - libzip-dev
       - libzzip-0-13
+      - npm
       - openjdk-8-jdk
       - pbzip2
       - python-pip
