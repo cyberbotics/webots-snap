@@ -47,7 +47,7 @@ parts:
       - libpci-dev
       - libpng-dev
       - libreadline-dev
-      - libssh--gcrypt-dev
+      - libssh-gcrypt-dev
       - libssl1.0-dev
       - libtiff5-dev
       - libusb-dev
