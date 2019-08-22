@@ -65,6 +65,7 @@ parts:
       - swig
       - unzip
       - wget
+      - xvfb
       - zip
     # See 'snapcraft plugins'
     plugin: make
