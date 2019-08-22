@@ -32,6 +32,7 @@ parts:
     build-packages:
       - cmake
       - curl
+      - execstack
       - ffmpeg
       - g++
       - git
@@ -82,6 +83,7 @@ parts:
       - libatk1.0-0
       - libcurl3-gnutls
       - libdbus-1-3
+      - libdouble-conversion1
       - libfreeimage3
       - libfreetype6
       - libgd3
@@ -107,6 +109,7 @@ parts:
       - libpci3
       - libproj12
       - libpsl5
+      - libpulse-mainloop-glib0
       - libroken18-heimdal
       - librtmp1
       - libsasl2-2
@@ -116,6 +119,15 @@ parts:
       - libvo-amrwbenc0
       - libwind0-heimdal
       - libxaw7
+      - libxcb-icccm4
+      - libxcb-image0
+      - libxcb-keysyms1
+      - libxcb-randr0
+      - libxcb-render-util0
+      - libxcb-util1
+      - libxcb-xinerama0
+      - libxcb-xkb1
+      - libxkbcommon-x11-0
       - libxft2
       - libxrandr2
       - libxrender1
