@@ -1,4 +1,4 @@
-# unset WEBOTS_HOME; snapcraft --debug --destructive-mode
+# unset WEBOTS_HOME LD_LIBRARY_PATH JAVA_HOME WEBOTS_*; snapcraft --debug --destructive-mode
 name: webots
 title: Webots
 base: core18
@@ -25,7 +25,7 @@ apps:
   webots:
     desktop: usr/share/webots/resources/webots.desktop
     command: usr/share/webots/webots "$@"
-    plugs: [home, x11]
+    plugs: [desktop, desktop-legacy, wayland, unity7, home, network, x11, opengl, pulseaudio]
 
 parts:
   webots:
@@ -72,7 +72,8 @@ parts:
     build-environment:
       - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
     source-type: git
-    source: https://github.com/omichel/webots
+    source: /home/olivier/webots
+    # source: https://github.com/omichel/webots
     source-branch: feature-snapcraft-build
     source-depth: 1
     stage-packages:
@@ -94,6 +95,9 @@ parts:
       - libgeos-3.6.2
       - libgfortran4
       - libglib2.0-0
+      - libgl1
+      - libgl1-mesa-dri
+      - libgl1-mesa-glx      
       - libglu1-mesa
       - libgsm1
       - libgssapi3-heimdal
@@ -147,7 +151,9 @@ parts:
       - libxcb-keysyms1
       - libxcb-randr0
       - libxcb-render-util0
+      - libxcb-shape0
       - libxcb-util1
+      - libxcb-xfixes0
       - libxcb-xinerama0
       - libxcb-xkb1
       - libxft2
