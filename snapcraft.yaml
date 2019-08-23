@@ -196,6 +196,7 @@ parts:
       - libzip-dev
       - libzvbi0
       - libzzip-0-13
+      - zlib1g
 
 apps:
   webots:
