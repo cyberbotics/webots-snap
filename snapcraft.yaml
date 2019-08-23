@@ -68,7 +68,6 @@ parts:
       - wget
       - xvfb
       - zip
-    # See 'snapcraft plugins'
     plugin: make
     build-environment:
       - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
