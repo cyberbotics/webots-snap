@@ -1,4 +1,14 @@
-# unset WEBOTS_HOME LD_LIBRARY_PATH JAVA_HOME WEBOTS_*; snapcraft --debug --destructive-mode
+# unset WEBOTS_HOME
+# unset LD_LIBRARY_PATH
+# unset JAVA_HOME
+# snapcraft --destructive-mode
+# snap install --dangerous webots_R2019b-rev1_amd64.snap
+# webots
+# snap uninstall webots
+# snapcraft login
+# snapcraft push --release=edge webots_R2019b-rev1_amd64.snap
+# snap install webots
+
 name: webots
 title: Webots
 base: core18
@@ -15,8 +25,9 @@ description: |
   Webots features a 3D web interface allowing you to publish simulations online.
 icon: webots.png
 license: Apache-2.0
-grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: devmode # use 'strict' once you have the right plugs and slots
+grade: stable # must be 'stable' to release into candidate/stable channels
+# confinement: strict # use 'strict' once you have the right plugs and slots
+confinement: classic
 architectures:
   - build-on: amd64
     run-on: amd64
@@ -95,11 +106,14 @@ parts:
     plugin: make
     build-environment:
       - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
-    source-type: git
+    # When building locally, uncomment the following line:
     source: /home/olivier/webots
+    # When building from snapcraft.io, uncomment the following lines:
     # source: https://github.com/omichel/webots
-    source-branch: feature-snapcraft-build
-    source-depth: 1
+    # source-type: git
+    # source-branch: feature-snapcraft-build
+    # source-tag: R2019b
+    # source-depth: 1
     stage-packages:
       # - make
       # - g++
@@ -196,10 +210,19 @@ parts:
       - libzip-dev
       - libzvbi0
       - libzzip-0-13
+      - util-linux
       - zlib1g
+
+plugs:
+  system-pci-read:
+    interface: system-files
+    read:
+      - /sys/bus/pci/devices/0000:3b:00.0/resource
+      - /sys/bus/pci/devices/0000:00:17.0/resource
+      # - /sys/devices/pci[0-9]*:[0-9]*/[0-9]*:[0-9]*:[0-9]*.[0-9]*/resource
 
 apps:
   webots:
-    plugs: [desktop, desktop-legacy, wayland, unity7, x11, opengl, pulseaudio, home, network]
+    plugs: [desktop, desktop-legacy, hidraw, joystick, wayland, unity7, x11, opengl, pulseaudio, home, network, system-observe, system-pci-read]
     desktop: usr/share/webots/resources/webots.desktop
     command: desktop-launch $SNAP/usr/share/webots/webots
