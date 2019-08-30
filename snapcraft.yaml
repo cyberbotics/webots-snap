@@ -26,8 +26,8 @@ description: |
 icon: webots.png
 license: Apache-2.0
 grade: stable # must be 'stable' to release into candidate/stable channels
-# confinement: strict # use 'strict' once you have the right plugs and slots
-confinement: classic
+confinement: strict # use 'strict' once you have the right plugs and slots
+# confinement: classic
 architectures:
   - build-on: amd64
     run-on: amd64
@@ -123,6 +123,8 @@ parts:
       - libasound2
       - libatk1.0-0
       - libavutil55
+      - libblkid1
+      - libc6
       - libcanberra-gtk-module
       - libcanberra-gtk3-module
       - libcrystalhd3
@@ -131,6 +133,8 @@ parts:
       - libdouble-conversion1
       - libfreeimage3
       - libfreetype6
+      - libgcc1
+      - libgcrypt20
       - libgd3
       - libgeos-3.6.2
       - libgfortran4
@@ -139,6 +143,7 @@ parts:
       - libglu1-mesa
       - libglvnd0
       - libglx0
+      - libgpg-error0
       - libgsm1
       - libgssapi3-heimdal
       - libgtk-3-0
@@ -150,21 +155,26 @@ parts:
       - libkrb5-26-heimdal
       - libldap-2.4-2
       - libltdl7
+      - liblzma5
       - libminizip1
+      - libmount1
       - libmp3lame0
       - libnghttp2-14
       - libnss3
       - libnuma1
+      - libopenal-data
       - libopencore-amrnb0
       - libopencore-amrwb0
       - libopus0
       - libpci3
+      - libpcre3
       - libproj12
       - libpsl5
       - libpulse-mainloop-glib0
       - libroken18-heimdal
       - librtmp1
       - libsasl2-2
+      - libselinux1
       - libshine3
       - libslang2
       - libsnappy1v5
@@ -175,8 +185,12 @@ parts:
       - libssh-gcrypt-4
       - libstdc++6
       - libswresample2
+      - libsystemd0
       - libtheora0
+      - libtinfo5
       - libtwolame0
+      - libudev1
+      - libuuid1
       - libva2
       - libva-drm2
       - libva-x11-2
@@ -207,22 +221,15 @@ parts:
       - libxss1
       - libxtst6
       - libxvidcore4
+      - liblz4-1
       - libzip-dev
       - libzvbi0
       - libzzip-0-13
       - util-linux
       - zlib1g
 
-plugs:
-  system-pci-read:
-    interface: system-files
-    read:
-      - /sys/bus/pci/devices/0000:3b:00.0/resource
-      - /sys/bus/pci/devices/0000:00:17.0/resource
-      # - /sys/devices/pci[0-9]*:[0-9]*/[0-9]*:[0-9]*:[0-9]*.[0-9]*/resource
-
 apps:
   webots:
-    plugs: [desktop, desktop-legacy, hidraw, joystick, wayland, unity7, x11, opengl, pulseaudio, home, network, system-observe, system-pci-read]
+    plugs: [browser-support, desktop, desktop-legacy, hardware-observe, hidraw, joystick, wayland, unity7, x11, opengl, pulseaudio, home, network, system-observe]
     desktop: usr/share/webots/resources/webots.desktop
     command: desktop-launch $SNAP/usr/share/webots/webots
