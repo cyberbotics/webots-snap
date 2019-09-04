@@ -43,7 +43,6 @@ parts:
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: gtk
     stage-packages:
-    - libxkbcommon0
     - ttf-ubuntu-font-family
     - dmz-cursor-theme
     - light-themes
@@ -117,14 +116,13 @@ parts:
     stage-packages:
       # - make
       # - g++
-      # - ffmpeg
-      # - xserver-xorg-core
+      # - libc6-dev
+      - ffmpeg
       - libasn1-8-heimdal
       - libasound2
       - libatk1.0-0
       - libavutil55
       - libblkid1
-      - libc6
       - libcanberra-gtk-module
       - libcanberra-gtk3-module
       - libcrystalhd3
@@ -225,11 +223,12 @@ parts:
       - libzip-dev
       - libzvbi0
       - libzzip-0-13
+      - lsb-release
       - util-linux
       - zlib1g
 
 apps:
   webots:
-    plugs: [browser-support, desktop, desktop-legacy, hardware-observe, hidraw, joystick, wayland, unity7, x11, opengl, pulseaudio, home, network, system-observe]
+    plugs: [browser-support, desktop, desktop-legacy, hardware-observe, hidraw, joystick, wayland, unity7, x11, opengl, pulseaudio, home, network]
     desktop: usr/share/webots/resources/webots.desktop
     command: desktop-launch $SNAP/usr/share/webots/webots
