@@ -26,11 +26,108 @@ description: |
 icon: webots.png
 license: Apache-2.0
 grade: stable # must be 'stable' to release into candidate/stable channels
-confinement: strict # use 'strict' once you have the right plugs and slots
-# confinement: classic
+confinement: strict
 architectures:
   - build-on: amd64
     run-on: amd64
+
+layout:
+  /etc/openal:
+    bind: $SNAP/etc/openal
+  /usr/include:
+    bind: $SNAP/usr/include
+  /usr/lib:
+    bind: $SNAP/usr/lib
+  /usr/share/alsa:
+    bind: $SNAP/usr/share/alsa
+  /usr/share/applications:
+    bind: $SNAP/usr/share/applications
+  /usr/share/bash-completion:
+    bind: $SNAP/usr/share/bash-completion
+  /usr/share/binfmts:
+    bind: $SNAP/usr/share/binfmts
+  /usr/share/bug:
+    bind: $SNAP/usr/share/bug
+  /usr/share/build-essential:
+    bind: $SNAP/usr/share/build-essential
+  /usr/share/dbus-1:
+    bind: $SNAP/usr/share/dbus-1
+  /usr/share/distro-info:
+    bind: $SNAP/usr/share/distro-info
+  /usr/share/doc:
+    bind: $SNAP/usr/share/doc
+  /usr/share/doc-base:
+    bind: $SNAP/usr/share/doc-base
+  /usr/share/dpkg:
+    bind: $SNAP/usr/share/dpkg
+  /usr/share/drirc.d:
+    bind: $SNAP/usr/share/drirc.d
+  /usr/share/fcitx:
+    bind: $SNAP/usr/share/fcitx
+  /usr/share/ffmpeg:
+    bind: $SNAP/usr/share/ffmpeg
+  /usr/share/fonts:
+    bind: $SNAP/usr/share/fonts
+  /usr/share/gcc-8:
+    bind: $SNAP/usr/share/gcc-8
+  /usr/share/GConf:
+    bind: $SNAP/usr/share/GConf
+  /usr/share/gdb:
+    bind: $SNAP/usr/share/gdb
+  /usr/share/gettext:
+    bind: $SNAP/usr/share/gettext
+  /usr/share/glib-2.0:
+    bind: $SNAP/usr/share/glib-2.0
+  /usr/share/gtk-engines:
+    bind: $SNAP/usr/share/gtk-engines
+  /usr/share/icons:
+    bind: $SNAP/usr/share/icons
+  /usr/share/java:
+    bind: $SNAP/usr/share/java
+  /usr/share/libdrm:
+    bind: $SNAP/usr/share/libdrm
+  /usr/share/libsensors4:
+    bind: $SNAP/usr/share/libsensors4
+  /usr/share/libthai:
+    bind: $SNAP/usr/share/libthai
+  /usr/share/lintian:
+    bind: $SNAP/usr/share/lintian
+  /usr/share/locale:
+    bind: $SNAP/usr/share/locale
+  /usr/share/man:
+    bind: $SNAP/usr/share/man
+  /usr/share/mime:
+    bind: $SNAP/usr/share/mime
+  /usr/share/openal:
+    bind: $SNAP/usr/share/openal
+  /usr/share/perl:
+    bind: $SNAP/usr/share/perl
+  /usr/share/perl5:
+    bind: $SNAP/usr/share/perl5
+  /usr/share/pixmaps:
+    bind: $SNAP/usr/share/pixmaps
+  /usr/share/pkgconfig:
+    bind: $SNAP/usr/share/pkgconfig
+  /usr/share/presage:
+    bind: $SNAP/usr/share/presage
+  /usr/share/proj:
+    bind: $SNAP/usr/share/proj
+  /usr/share/pyshared:
+    bind: $SNAP/usr/share/pyshared
+  /usr/share/python3:
+    bind: $SNAP/usr/share/python3
+  /usr/share/sounds:
+    bind: $SNAP/usr/share/sounds
+  /usr/share/themes:
+    bind: $SNAP/usr/share/themes
+  /usr/share/thumbnailers:
+    bind: $SNAP/usr/share/thumbnailers
+  /usr/share/upstart:
+    bind: $SNAP/usr/share/upstart
+  /usr/share/X11:
+    bind: $SNAP/usr/share/X11
+  /usr/share/xml:
+    bind: $SNAP/usr/share/xml
 
 parts:
   desktop-gtk3:
@@ -114,9 +211,9 @@ parts:
     # source-tag: R2019b
     # source-depth: 1
     stage-packages:
-      # - make
-      # - g++
-      # - libc6-dev
+      - openjdk-11-jdk
+      - build-essential
+      - libc6-dev
       - ffmpeg
       - libasn1-8-heimdal
       - libasound2
