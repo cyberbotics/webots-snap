@@ -118,7 +118,7 @@ parts:
     # When building locally, uncomment the following line:
     # source: /home/olivier/webots
     # When building from snapcraft.io, uncomment the following 5 lines:
-    source: https://github.com/omichel/webots
+    source: https://github.com/cyberbotics/webots
     source-type: git
     source-branch: feature-snapcraft-build
     source-tag: R2019b
