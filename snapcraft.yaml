@@ -116,13 +116,13 @@ parts:
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
     # When building locally, uncomment the following line:
-    source: /home/olivier/webots
+    # source: /home/olivier/webots
     # When building from snapcraft.io, uncomment the following lines:
-    # source: https://github.com/omichel/webots
-    # source-type: git
-    # source-branch: feature-snapcraft-build
-    # source-tag: R2019b
-    # source-depth: 1
+    source: https://github.com/omichel/webots
+    source-type: git
+    source-branch: feature-snapcraft-build
+    source-tag: R2019b
+    source-depth: 1
     stage-packages:
     - openjdk-11-jdk
     - ca-certificates-java
