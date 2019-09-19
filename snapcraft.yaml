@@ -89,14 +89,16 @@ parts:
     - libglib2.0-dev
     - libglu1-mesa-dev
     - libjpeg8-dev
-    - libpci-dev
+    - libpci3
     - libpng-dev
     - libreadline-dev
+    - libssh-4
     - libssh-gcrypt-dev
     - libssl1.0-dev
     - libtiff5-dev
     - libusb-dev
     - libxml2-dev
+    - libxslt1.1
     - libzip-dev
     - libzzip-0-13
     - lsb-release
@@ -115,13 +117,15 @@ parts:
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
+    source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
-    # source: /home/olivier/webots
+    #source-type: local
+    #source: /home/cyberbotics/webots/
     # When building from snapcraft.io, uncomment the following 4 lines:
-    source: https://github.com/cyberbotics/webots
-    source-type: git
-    source-depth: 1
-    source-branch: feature-snapcraft-build
+    #source: https://github.com/cyberbotics/webots
+    #source-type: git
+    #source-depth: 1
+    #source-branch: feature-snapcraft-build
     # We should specify either the source-branch or the source-tag, but not both
     # source-tag: R2019b
     stage-packages:
@@ -156,6 +160,7 @@ parts:
     - libgpg-error0
     - libgsm1
     - libgssapi3-heimdal
+    - libssh-4
     - libgtk-3-0
     - libhcrypto4-heimdal
     - libheimbase1-heimdal
