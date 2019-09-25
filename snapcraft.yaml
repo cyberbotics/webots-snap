@@ -41,8 +41,8 @@ layout:
     bind: $SNAP/usr/include
   /usr/lib/x86_64-linux-gnu:  # to allow gcc linker to find the necessary libraries
     bind: $SNAP/usr/lib/x86_64-linux-gnu
-  /usr/lib/libdrm:  # to fix a warning displayed by Webots on AMD GPUs
-    bind: $SNAP/usr/lib/libdrm
+  /usr/share/libdrm:  # to fix a warning displayed by Webots on AMD GPUs
+    bind: $SNAP/usr/share/libdrm
 
 parts:
   desktop-gtk3:
@@ -68,7 +68,6 @@ parts:
     - libgtk-3-bin
     - unity-gtk3-module
     - libappindicator3-1
-    - locales-all
     - xdg-user-dirs
     - ibus-gtk3
     - libibus-1.0-5
