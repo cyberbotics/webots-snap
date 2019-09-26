@@ -1,12 +1,12 @@
 # unset WEBOTS_HOME
 # unset LD_LIBRARY_PATH
 # unset JAVA_HOME
-# snapcraft --destructive-mode
+# snapcraft  # --destructive-mode may be needed if run on a virtual machine
 # snap install --dangerous webots_R2019b-rev1_amd64.snap
 # webots
 # snap uninstall webots
 # snapcraft login
-# snapcraft push --release=edge webots_R2019b-rev1_amd64.snap
+# snapcraft push webots_R2019b-rev1_amd64.snap
 # snap install webots
 
 name: webots
@@ -252,6 +252,6 @@ apps:
     environment:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
-    plugs: [browser-support, desktop, desktop-legacy, gsettings, hardware-observe, hidraw, hostname-control, joystick, wayland, unity7, x11, opengl, pulseaudio, home, network]
+    plugs: [browser-support, desktop, desktop-legacy, gsettings, hidraw, hostname-control, joystick, wayland, unity7, x11, opengl, pulseaudio, home, network]
     desktop: usr/share/webots/resources/webots.desktop
     command: desktop-launch $SNAP/usr/share/webots/webots
