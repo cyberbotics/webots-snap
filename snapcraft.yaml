@@ -252,6 +252,20 @@ apps:
     environment:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
-    plugs: [browser-support, desktop, desktop-legacy, gsettings, hidraw, hostname-control, joystick, wayland, unity7, x11, opengl, pulseaudio, home, network]
+    plugs:
+    - browser-support
+    - desktop
+    - desktop-legacy
+    - gsettings
+    - hidraw
+    - home
+    - hostname-control
+    - joystick
+    - network
+    - opengl
+    - pulseaudio
+    - wayland
+    - unity7
+    - x11
     desktop: usr/share/webots/resources/webots.desktop
     command: desktop-launch $SNAP/usr/share/webots/webots
