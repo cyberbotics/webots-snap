@@ -254,6 +254,7 @@ apps:
       LC_ALL: C.UTF-8
       DISABLE_WAYLAND: 1
     plugs:
+    - audio-playback
     - browser-support
     - desktop
     - desktop-legacy
