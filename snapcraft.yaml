@@ -117,10 +117,10 @@ parts:
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
-    source: https://cyberbotics.com/files/repository/beta/webots.tar.xz
+    #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
-    #source-type: local
-    #source: /home/cyberbotics/webots/
+    source-type: local
+    source: webots/
     # When building from snapcraft.io, uncomment the following 4 lines:
     #source: https://github.com/cyberbotics/webots
     #source-type: git
