@@ -28,7 +28,7 @@ jobs:
             - libfreetype6-dev
             - libxml2-dev
             - libzzip-0-13
-            - libssl-dev
+            - libssl1.0-dev
             - libboost-dev
             - libjpeg8-dev
             - libavcodec-extra
@@ -39,13 +39,13 @@ jobs:
             - python-pip
             - libreadline-dev
             - libassimp-dev
-            - libpng12-dev
-            - libav-tools
+            - libpng-dev
+            - ffmpeg
             - npm
-            - python3.5-dev
-            - openjdk-8-jdk
+            - python3.6-dev
+            - python3.7-dev
+            - openjdk-11-jdk
             - curl
-            - libwebpdemux1
             - fakeroot
             - pbzip2
             - libxkbcommon-x11-dev
