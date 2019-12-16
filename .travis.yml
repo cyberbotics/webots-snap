@@ -15,6 +15,8 @@ jobs:
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH https://github.com/cyberbotics/webots.git
         - cd webots; make release -j2
     - &snap_creation
+      stage: Snap Creation
+      name: Snap Creation
       install:
         - sudo snap install snapcraft --classic
         - sudo snap install multipass --beta --classic
