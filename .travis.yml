@@ -1,0 +1,15 @@
+os: linux
+dist: bionic
+cache:
+  directories:
+    - webots
+services:
+  - xvfb
+addons:
+  apt:
+    packages:
+      - snapcraft
+install:
+  - git clone --depth 3 --single-branch --branch develop https://github.com/cyberbotics/webots.git
+script:
+  - snapcraft
