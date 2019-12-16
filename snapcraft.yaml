@@ -2,11 +2,11 @@
 # unset LD_LIBRARY_PATH
 # unset JAVA_HOME
 # snapcraft  # --destructive-mode may be needed if run on a virtual machine
-# snap install --dangerous webots_R2019b-rev1_amd64.snap
+# snap install --dangerous webots_R2020a_amd64.snap
 # webots
 # snap uninstall webots
 # snapcraft login
-# snapcraft push webots_R2019b-rev1_amd64.snap
+# snapcraft push webots_R2020a_amd64.snap
 # snap install webots
 
 name: webots
