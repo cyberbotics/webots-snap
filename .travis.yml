@@ -4,7 +4,7 @@ services:
   - xvfb
 install:
   - sudo snap install snapcraft --classic
-  - sudo snap install multipass --classic
+  - sudo snap install multipass --beta --classic
   - git clone --depth 3 --single-branch --branch develop https://github.com/cyberbotics/webots.git
 script:
   - snapcraft
