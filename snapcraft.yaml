@@ -12,7 +12,7 @@
 name: webots
 title: Webots
 base: core18
-version: 'R2019b-rev1'
+version: 'R2020a'
 summary: Webots is a free and open-source 3D robot simulator
 description: |
   Webots is a free and open-source 3D robot simulator.
