@@ -10,6 +10,45 @@ jobs:
     - &webots_compilation
       stage: Webots Compilation
       name: Webots Compilation
+      before_install:
+        - sudo add-apt-repository ppa:deadsnakes/ppa -y
+        - sudo apt update
+        - sudo apt install -y python3.6-dev python3.7-dev python3.8-dev
+      addons: &apt_packages
+        apt:
+          packages:
+            - g++
+            - cmake
+            - libusb-dev
+            - swig
+            - python2.7-dev
+            - libglu1-mesa-dev
+            - libglib2.0-dev
+            - libfreeimage-dev
+            - libfreetype6-dev
+            - libxml2-dev
+            - libzzip-0-13
+            - libssl-dev
+            - libboost-dev
+            - libjpeg8-dev
+            - libavcodec-extra
+            - libgd-dev
+            - libtiff5-dev
+            - libssh-gcrypt-dev
+            - libzip-dev
+            - python-pip
+            - libreadline-dev
+            - libassimp-dev
+            - libpng12-dev
+            - libav-tools
+            - npm
+            - python3.5-dev
+            - openjdk-8-jdk
+            - curl
+            - libwebpdemux1
+            - fakeroot
+            - pbzip2
+            - libxkbcommon-x11-dev
       install:
         - rm -rf webots
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH https://github.com/cyberbotics/webots.git
