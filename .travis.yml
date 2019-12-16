@@ -5,6 +5,9 @@ services:
 install:
   - sudo snap install snapcraft --classic
   - sudo snap install multipass --beta --classic
-  - git clone --recurse-submodules --depth 3 --single-branch --branch develop https://github.com/cyberbotics/webots.git
+  - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH https://github.com/cyberbotics/webots.git
 script:
+  - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
   - sudo snapcraft
+  - cp *.snap webots/distribution
+  - src/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=https://github.com/cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH --commit=$COMMIT_ID --tag=$TRAVIS_TAG
