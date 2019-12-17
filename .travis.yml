@@ -61,6 +61,9 @@ jobs:
         - sudo snap install snapcraft --classic
         - sudo snap install multipass --beta --classic
       script:
+        - ls webots
+        - ls webots/include
+        - ls webots/include/glad
         - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
         - sudo snapcraft
         - cp *.snap webots/distribution
