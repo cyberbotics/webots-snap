@@ -3,76 +3,39 @@ dist: bionic
 language: generic
 cache:
   directories:
-    - webots
+    - /root/parts/webots
 services:
   - xvfb
 jobs:
   include:
-    - &webots_compilation
-      stage: Webots Compilation
-      name: Webots Compilation
-      before_install:
-        - sudo add-apt-repository ppa:deadsnakes/ppa -y
-        - sudo apt update
-        - sudo apt install -y python3.6-dev python3.7-dev python3.8-dev
-      addons: &apt_packages
-        apt:
-          packages:
-            - g++
-            - cmake
-            - libusb-dev
-            - swig
-            - python2.7-dev
-            - libglu1-mesa-dev
-            - libglib2.0-dev
-            - libfreeimage-dev
-            - libfreetype6-dev
-            - libxml2-dev
-            - libzzip-0-13
-            - libssl1.0-dev
-            - libboost-dev
-            - libjpeg8-dev
-            - libavcodec-extra
-            - libgd-dev
-            - libtiff5-dev
-            - libssh-gcrypt-dev
-            - libzip-dev
-            - python-pip
-            - libreadline-dev
-            - libassimp-dev
-            - libpng-dev
-            - ffmpeg
-            - npm
-            - python3.6-dev
-            - python3.7-dev
-            - openjdk-11-jdk
-            - curl
-            - fakeroot
-            - pbzip2
-            - libxkbcommon-x11-dev
+    - &snap_pull
+      stage: Snap Pull
+      name: Snap Pull
       install:
-        - rm -rf webots
+        - sudo rm -rf /root/parts/webots
+        - sudo snap install snapcraft --classic
+        - sudo snap install multipass --beta --classic
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH https://github.com/cyberbotics/webots.git
-        - cd webots; make release -j2
-    - &snap_creation
-      stage: Snap Creation
-      name: Snap Creation
+      script:
+        - sudo snapcraft pull
+    - &snap_build
+      stage: Snap Build
+      name: Snap Build
       install:
         - sudo snap install snapcraft --classic
         - sudo snap install multipass --beta --classic
+        - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH https://github.com/cyberbotics/webots.git
       script:
-        - find webots -type f -exec touch {} +
+        - sudo snapcraft build
+    - &snap
+      stage: Snap
+      name: Snap
+      install:
+        - sudo snap install snapcraft --classic
+        - sudo snap install multipass --beta --classic
+        - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH https://github.com/cyberbotics/webots.git
+      script:
         - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
-        - sudo snapcraft
+        - sudo snapcraft snap
         - cp *.snap webots/distribution
         - src/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=https://github.com/cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH --commit=$COMMIT_ID --tag=$TRAVIS_TAG
-
-#install:
-#  - sudo snap install snapcraft --classic
-#  - sudo snap install multipass --beta --classic
-#  - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH https://github.com/cyberbotics/webots.git
-#script:
-#  - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
-#  - sudo snapcraft
-#  - cp *.snap webots/distribution
-#  - src/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=https://github.com/cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH --commit=$COMMIT_ID --tag=$TRAVIS_TAG
