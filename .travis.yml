@@ -1,6 +1,7 @@
 os: linux
 dist: bionic
 language: generic
+sudo: required
 cache:
   directories:
     - /root/parts/webots
