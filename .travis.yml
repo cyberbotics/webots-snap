@@ -18,7 +18,7 @@ jobs:
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH https://github.com/cyberbotics/webots.git
       script:
         - sudo snapcraft build
-        - find . -type f -printf "%T+\t%p\n" | sort | cut -f 2 > webots/touch_order.txt
+        - find webots -type f -printf "%T+\t%p\n" | sort | cut -f 2 > webots/touch_order.txt
     - &snap
       stage: Snap
       name: Snap
@@ -27,8 +27,12 @@ jobs:
         - sudo snap install multipass --beta --classic
       script:
         - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
-        - cat webots/touch_order.txt
-        - if [[ -f webots/touch_order.txt ]]; then while read fn; do touch $fn done < webots/touch_order.txt fi
+        -
+          if [[ -f webots/touch_order.txt ]]; then
+            while read fn; do
+              touch $fn
+            done < webots/touch_order.txt
+          fi
         - sudo snapcraft snap
         - cp *.snap webots/distribution
         - src/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=https://github.com/cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH --commit=$COMMIT_ID --tag=$TRAVIS_TAG
