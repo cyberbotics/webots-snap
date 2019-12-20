@@ -40,7 +40,7 @@ class TestBuildDependencies(unittest.TestCase):
         self.travisDependencies = []
         with open(os.path.join(filePAth, '..', '.travis.yml')) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
-            self.travisDependencies = set(data['addons']['apt']['packages'])
+            self.travisDependencies = set(data['jobs']['include'][1]['addons']['apt']['packages'])
 
     def test_build_dependencies(self):
         """Test that the 'worlds' directory is correct."""
