@@ -16,7 +16,6 @@ jobs:
         - pip install -r tests/requirements.txt
       script:
         - python -m unittest discover -s tests
-  include:
     - &build
       stage: Build
       name: Build
