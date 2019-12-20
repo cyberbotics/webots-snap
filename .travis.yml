@@ -6,7 +6,6 @@ services:
   - xvfb
 after_failure: >
   if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"Webots need your Help! Nightly build failed during the '$(echo $TRAVIS_BUILD_STAGE_NAME)' stage on the '$(echo $TRAVIS_BRANCH)' branch: $(echo $TRAVIS_BUILD_WEB_URL)\" }" $DISCORD_WEBHOOK; fi
-
 jobs:
   include:
     - &test_suite
@@ -78,3 +77,4 @@ jobs:
         - sudo snap install snapcraft --classic
         - pip install PyGithub # used to upload packages to Github releases
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH_1 https://github.com/cyberbotics/webots.git
+        - sed -i 's/R2020a-rev1/R2020b/g' snapcraft.yaml
