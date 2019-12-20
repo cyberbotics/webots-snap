@@ -51,6 +51,7 @@ install:
   - sudo snap install snapcraft --classic
   - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH https://github.com/cyberbotics/webots.git
 script:
+  - python -m unittest discover -s tests
   - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
   - sudo snapcraft --destructive-mode
   - cp *.snap webots/distribution
