@@ -16,7 +16,6 @@ jobs:
         - pip install -r tests/requirements.txt
       script:
         - python -m unittest discover -s tests
-  include:
     - &build
       stage: Build
       name: Build
@@ -71,4 +70,4 @@ jobs:
         - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then python webots/src/packaging/set_commit_and_date_in_version.py $COMMIT_ID; fi
         - sudo snapcraft --destructive-mode
         - cp *.snap webots/distribution
-        - src/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=https://github.com/cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH --commit=$COMMIT_ID --tag=$TRAVIS_TAG
+        - webots/src/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=https://github.com/cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH --commit=$COMMIT_ID --tag=$TRAVIS_TAG
