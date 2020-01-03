@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 count=0
-until snapcraft push webots_R2019b-rev1_amd64.snap
+version=`cat webots/resources/version.txt`
+until snapcraft push webots_${version}_amd64.snap
 do
   (( count ++ ))
   echo "Trying again ($count)"

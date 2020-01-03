@@ -2,17 +2,17 @@
 # unset LD_LIBRARY_PATH
 # unset JAVA_HOME
 # snapcraft  # --destructive-mode may be needed if run on a virtual machine
-# snap install --dangerous webots_R2019b-rev1_amd64.snap
+# snap install --dangerous webots_R2020a-rev1_amd64.snap
 # webots
 # snap uninstall webots
 # snapcraft login
-# snapcraft push webots_R2019b-rev1_amd64.snap
+# snapcraft push webots_R2020a-rev1_amd64.snap
 # snap install webots
 
 name: webots
 title: Webots
 base: core18
-version: 'R2019b-rev1'
+version: 'R2020a-rev1'
 summary: Webots is a free and open-source 3D robot simulator
 description: |
   Webots is a free and open-source 3D robot simulator.
@@ -109,6 +109,7 @@ parts:
     - python2.7-dev
     - python3.6-dev
     - python3.7-dev
+    - python3.8-dev
     - swig
     - unzip
     - wget
