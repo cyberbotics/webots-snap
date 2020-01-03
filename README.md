@@ -1,4 +1,4 @@
-[![Travis status](https://travis-ci.com/cyberbotics/webots-snap.svg?branch=master)](https://travis-ci.com/cyberbotics/webots-snap)[![Snap Status](https://build.snapcraft.io/badge/omichel/webots-snap.svg)](https://build.snapcraft.io/user/omichel/webots-snap)
+[![Travis status](https://travis-ci.com/cyberbotics/webots-snap.svg?branch=master)](https://travis-ci.com/cyberbotics/webots-snap) [![Snap Status](https://build.snapcraft.io/badge/omichel/webots-snap.svg)](https://build.snapcraft.io/user/omichel/webots-snap)
 
 # webots-snap
 
