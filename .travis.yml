@@ -16,6 +16,7 @@ jobs:
       script:
         - python -m unittest discover -s tests
     - &build
+      if: type = cron OR type = api OR tag IS present
       stage: Build
       name: Build $WEBOTS_TARGET_BRANCH_0
       addons:
