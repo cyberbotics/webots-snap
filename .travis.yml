@@ -19,6 +19,9 @@ jobs:
       if: type = cron OR type = api OR tag IS present
       stage: Build
       name: Build $WEBOTS_TARGET_BRANCH_0
+      before_install:
+        - sudo add-apt-repository ppa:deadsnakes/ppa -y
+        - sudo apt update
       addons:
         apt:
           packages:
