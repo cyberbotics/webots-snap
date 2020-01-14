@@ -19,9 +19,6 @@ jobs:
       if: type = cron OR type = api OR tag IS present
       stage: Build
       name: Build $WEBOTS_TARGET_BRANCH_0
-      before_install:
-        - sudo add-apt-repository ppa:deadsnakes/ppa -y
-        - sudo apt update
       addons:
         apt:
           packages:
@@ -54,7 +51,6 @@ jobs:
             - pbzip2
             - python-pip
             - python2.7-dev
-            - python3.5-dev
             - python3.6-dev
             - python3.7-dev
             - python3.8-dev
@@ -63,9 +59,13 @@ jobs:
             - wget
             - xvfb
             - zip
-      install:
+      before_install:
+        - sudo add-apt-repository ppa:deadsnakes/ppa -y
+        - sudo apt update
+        - sudo apt install -y python3.5-dev
         - sudo snap install snapcraft --classic
         - pip install PyGithub # used to upload packages to Github releases
+      install:
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH_0 https://github.com/cyberbotics/webots.git
       script:
         - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
@@ -76,8 +76,6 @@ jobs:
     - <<: *build
       name: Build $WEBOTS_TARGET_BRANCH_1
       install:
-        - sudo snap install snapcraft --classic
-        - pip install PyGithub # used to upload packages to Github releases
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH_1 https://github.com/cyberbotics/webots.git
         - sed -i 's/R2020a-rev1/R2020b/g' snapcraft.yaml
       script:
