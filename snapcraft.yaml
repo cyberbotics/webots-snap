@@ -99,6 +99,7 @@ parts:
     - libzip-dev
     - libzzip-0-13
     - lsb-release
+    - nodejs-dev
     - node-gyp
     - npm
     - openjdk-11-jdk
