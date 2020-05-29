@@ -46,9 +46,9 @@ jobs:
             - libzip-dev
             - libzzip-0-13
             - lsb-release
-            - libssl1.0-dev
-            - nodejs-dev
-            - node-gyp
+            - libssl1.0-dev  # dependency of npm
+            - nodejs-dev     # dependency of npm
+            - node-gyp       # dependency of npm
             - npm
             - openjdk-11-jdk
             - pbzip2
