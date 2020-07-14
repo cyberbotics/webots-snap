@@ -154,7 +154,7 @@ parts:
     - libgcc1
     - libgcrypt20
     - libgd3
-    - libgeos-3.6.2
+    - libgeos-dev
     - libgfortran4
     - libglib2.0-0
     - libgl1
