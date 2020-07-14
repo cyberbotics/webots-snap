@@ -83,13 +83,13 @@ jobs:
         - cp *.snap webots/distribution
         - webots/src/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH_0 --commit=$COMMIT_ID --tag=$TRAVIS_TAG
     - <<: *build
-      name: Build $WEBOTS_TARGET_BRANCH_1
+      name: Build $WEBOTS_TARGET_BRANCH_TEST
       install:
-        - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH_1 https://github.com/cyberbotics/webots.git
+        - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH_TEST https://github.com/cyberbotics/webots.git
         - sed -i 's/R2020a-rev2/R2020b/g' snapcraft.yaml
       script:
         - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
         - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then python webots/src/packaging/set_commit_and_date_in_version.py $COMMIT_ID; fi
         - travis_wait 40 sudo snapcraft --destructive-mode
         - cp *.snap webots/distribution
-        - webots/src/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH_1 --commit=$COMMIT_ID --tag=$TRAVIS_TAG
+        - webots/src/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH_TEST --commit=$COMMIT_ID --tag=$TRAVIS_TAG
