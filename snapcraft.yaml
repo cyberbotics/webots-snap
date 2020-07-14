@@ -94,6 +94,12 @@ parts:
     - libssh-gcrypt-dev
     - libssl1.1
     - libusb-dev
+    - libxcb-icccm4
+    - libxcb-image0
+    - libxcb-keysyms1
+    - libxcb-randr0
+    - libxcb-render-util0
+    - libxcb-xinerama0
     - libxml2-dev
     - libxslt1.1
     - libzip-dev
