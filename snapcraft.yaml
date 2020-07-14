@@ -136,6 +136,7 @@ parts:
     - build-essential
     - libc6-dev
     - ffmpeg
+    - freeglut3-dev
     - libasn1-8-heimdal
     - libasound2
     - libatk1.0-0
