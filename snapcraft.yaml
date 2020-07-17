@@ -94,6 +94,12 @@ parts:
     - libssh-gcrypt-dev
     - libssl1.1
     - libusb-dev
+    - libxcb-icccm4
+    - libxcb-image0
+    - libxcb-keysyms1
+    - libxcb-randr0
+    - libxcb-render-util0
+    - libxcb-xinerama0
     - libxml2-dev
     - libxslt1.1
     - libzip-dev
@@ -136,6 +142,7 @@ parts:
     - build-essential
     - libc6-dev
     - ffmpeg
+    - freeglut3-dev
     - libasn1-8-heimdal
     - libasound2
     - libatk1.0-0
@@ -153,7 +160,7 @@ parts:
     - libgcc1
     - libgcrypt20
     - libgd3
-    - libgeos-3.6.2
+    - libgeos-dev
     - libgfortran4
     - libglib2.0-0
     - libgl1
