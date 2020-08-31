@@ -69,9 +69,6 @@ jobs:
             - xvfb
             - zip
       before_install:
-        - sudo add-apt-repository ppa:deadsnakes/ppa -y
-        - sudo apt update
-        - sudo apt install -y python3.5-dev
         - sudo snap install snapcraft --classic
         - pip install PyGithub # used to upload packages to Github releases
       install:
