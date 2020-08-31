@@ -73,10 +73,7 @@ jobs:
         - pip install PyGithub # used to upload packages to Github releases
       install:
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH_0 https://github.com/cyberbotics/webots.git
-        - ls
-        - ls webots
-        - ls webots/scripts
-        - ./webots/scripts/linux_optional_compilation_dependencies.sh
+        - ./webots/scripts/install/linux_optional_compilation_dependencies.sh
       script:
         - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
         - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then python webots/scripts/packaging/set_commit_and_date_in_version.py $COMMIT_ID; fi
@@ -87,7 +84,7 @@ jobs:
       name: Build $WEBOTS_TARGET_BRANCH_1
       install:
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH_1 https://github.com/cyberbotics/webots.git
-        - ./webots/scripts/linux_optional_compilation_dependencies.sh
+        - ./webots/scripts/install/linux_optional_compilation_dependencies.sh
         - sed -i 's/R2020b-rev1/R2021a/g' snapcraft.yaml
       script:
         - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
