@@ -73,6 +73,9 @@ jobs:
         - pip install PyGithub # used to upload packages to Github releases
       install:
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH_0 https://github.com/cyberbotics/webots.git
+        - ls
+        - ls webots
+        - ls webots/scripts
         - ./webots/scripts/linux_optional_compilation_dependencies.sh
       script:
         - export COMMIT_ID=$(cd webots; git rev-parse HEAD)
