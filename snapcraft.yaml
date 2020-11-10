@@ -78,6 +78,7 @@ parts:
     - build-essential
     - cmake
     - curl
+    - dirmngr
     - execstack
     - ffmpeg
     - git
@@ -113,11 +114,11 @@ parts:
     - pbzip2
     - python-pip
     - python2.7-dev
-    - python3.5-dev
     - python3.6-dev
     - python3.7-dev
     - python3.8-dev
     - swig
+    - software-properties-common
     - unzip
     - wget
     - xvfb
@@ -125,6 +126,7 @@ parts:
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
+    - ROS_DISTRO: "melodic"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
     source-type: local
@@ -136,6 +138,10 @@ parts:
     #source-branch: feature-snapcraft-build
     # We should specify either the source-branch or the source-tag, but not both
     # source-tag: R2019b
+    override-build: |
+      npm install -g npm@next   # Because the the default version in Ubuntu 18.04 is broken
+      ./scripts/install/linux_optional_compilation_dependencies.sh
+      snapcraftctl build
     stage-packages:
     - openjdk-11-jdk
     - ca-certificates-java
