@@ -1,7 +1,6 @@
 os: linux
 dist: bionic
 language: python
-sudo: required
 services:
   - xvfb
 after_failure: >
