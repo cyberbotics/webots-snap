@@ -91,8 +91,8 @@ parts:
     # We should specify either the source-branch or the source-tag, but not both
     # source-tag: R2019b
     override-build:
-      npm install -g npm@next
       $WEBOTS_HOME/scripts/install/linux_optional_compilation_dependencies.sh
+      npm install -g npm@next
       snapcraftctl build
     stage-packages:
     - openjdk-11-jdk
