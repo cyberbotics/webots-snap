@@ -76,6 +76,7 @@ parts:
   webots:
     build-packages:
     - git
+    - npm
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
