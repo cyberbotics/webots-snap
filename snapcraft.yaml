@@ -90,9 +90,10 @@ parts:
     #source-branch: feature-snapcraft-build
     # We should specify either the source-branch or the source-tag, but not both
     # source-tag: R2019b
-    override-pull:
-      $WEBOTS_HOME/scripts/install/linux_optional_compilation_dependencies.sh
-      npm install -g npm@next
+    override-pull: |
+      snapcraftctl pull
+      ./scripts/install/linux_optional_compilation_dependencies.sh
+      npm install -g npm@next   # Because the the default version in Ubuntu 18.04 is broken
     stage-packages:
     - openjdk-11-jdk
     - ca-certificates-java
