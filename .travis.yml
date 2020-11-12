@@ -38,7 +38,7 @@ jobs:
         - cp *.snap webots/distribution
         - webots/scripts/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH_0 --commit=$COMMIT_ID --tag=$TRAVIS_TAG
     - <<: *build
-      if: type = cron OR type = api OR tag IS present
+      if: commit_message NOT IN (debug) AND (type = cron OR type = api OR tag IS present)
       name: Build $WEBOTS_TARGET_BRANCH_1
       install:
         - git clone --recurse-submodules --depth 3 --single-branch --branch $WEBOTS_TARGET_BRANCH_1 https://github.com/cyberbotics/webots.git
