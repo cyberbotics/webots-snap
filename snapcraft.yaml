@@ -106,8 +106,11 @@ parts:
     - libzip-dev
     - libzzip-0-13
     - lsb-release
-    - libssl1.0-dev  # dependency of npm
-    - nodejs-dev     # dependency of npm
+    - libssl-dev  # dependency of npm
+    # We need a specific versions of nodejs to ensure a ros install doesn't remove npm
+    # For details, see: https://github.com/ros/rosdistro/issues/27302
+    - nodejs-dev=8.10.0~dfsg-2ubuntu0.2 # dependency of npm
+    - nodejs=8.10.0~dfsg-2ubuntu0.2 # dependency of npm
     - node-gyp       # dependency of npm
     - npm
     - openjdk-11-jdk
@@ -139,7 +142,6 @@ parts:
     # source-tag: R2019b
     override-pull: |
       snapcraftctl pull
-      npm install -g npm@next   # Because the the default version in Ubuntu 18.04 is broken
       ./scripts/install/linux_optional_compilation_dependencies.sh
     stage-packages:
     - openjdk-11-jdk
