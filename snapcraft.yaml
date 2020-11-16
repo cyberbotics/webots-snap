@@ -76,7 +76,6 @@ parts:
   webots:
     build-packages:
     - git
-    - npm
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
@@ -93,7 +92,6 @@ parts:
     # source-tag: R2019b
     override-pull: |
       snapcraftctl pull
-      npm install -g npm@next   # Because the the default version in Ubuntu 18.04 is broken
       ./scripts/install/linux_optional_compilation_dependencies.sh
     stage-packages:
     - openjdk-11-jdk
