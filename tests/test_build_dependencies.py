@@ -37,7 +37,7 @@ class TestBuildDependencies(unittest.TestCase):
             data = yaml.load(f, Loader=yaml.FullLoader)
             self.snapcraftDependencies = set(data['parts']['webots']['build-packages'])
 
-        self.travisDependencies = ['python3.5-dev']
+        self.travisDependencies = []
         with open(os.path.join(filePAth, '..', '.travis.yml')) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
             self.travisDependencies = set(data['jobs']['include'][1]['addons']['apt']['packages'] + self.travisDependencies)
