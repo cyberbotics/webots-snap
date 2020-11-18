@@ -95,7 +95,7 @@ parts:
     override-pull: |
       snapcraftctl pull
       ./scripts/install/linux_optional_compilation_dependencies.sh
-      sudo apt install xvfb
+      sudo apt install --yes xvfb
       Xvfb :99 &
       export DISPLAY=:99
     stage-packages:
