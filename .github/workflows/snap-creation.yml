@@ -47,8 +47,8 @@ jobs:
       with:
         name: 'snap'
         path: ${{ steps.snapcraft.outputs.snap}}
-      run: |
-        cp ${{ steps.snapcraft.outputs.snap}} webots/distribution
+    - name: Copy Snap Package in webots/distribution
+      run: cp ${{ steps.snapcraft.outputs.snap}} webots/distribution
     - name: Create/Update GitHub Release
       if: ${{ github.event_name == 'schedule' || github.event_name == 'push'}}
       run: |
