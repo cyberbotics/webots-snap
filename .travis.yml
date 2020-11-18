@@ -23,6 +23,7 @@ jobs:
           packages:
             - git
             - python-pip
+            - xvfb
       before_install:
         - sudo snap install snapcraft --classic
         - pip install PyGithub # used to upload packages to Github releases
