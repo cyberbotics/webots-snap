@@ -1,0 +1,57 @@
+name: Webots Snap Package Creation
+on: 
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  schedule:
+  - cron: "0 23 * * *"
+  push:
+    tags:
+      - '*'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  cleanup-runs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: rokroskar/workflow-run-cleanup-action@master
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+  build:
+    needs: cleanup-runs
+    if: ${{ github.event_name == 'schedule' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
+    strategy:
+      matrix:
+        branch: [master, develop]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Clone Webots Repository
+      run: |
+        sudo apt install git
+        git clone --recurse-submodules --depth 3 --single-branch --branch ${{ matrix.branch }} https://github.com/cyberbotics/webots.git
+    - name: Install Dependencies
+      run: |
+        #sudo snap install snapcraft --classic
+        sudo apt install python-pip
+        pip install PyGithub # used to upload packages to Github releases
+        # sudo ./webots/scripts/install/linux_optional_compilation_dependencies.sh
+        export COMMIT_ID=$(cd webots; git rev-parse HEAD)
+        python webots/scripts/packaging/set_commit_and_date_in_version.py $COMMIT_ID; fi
+        # sudo snapcraft --destructive-mode
+    - name: Create Snap Package
+    - uses: snapcore/action-build@v1
+      id: snapcraft
+    - name: Upload Snap Package
+    - uses: actions/upload-artifact@v2
+      with:
+        name: 'snap'
+        path: ${{ steps.snapcraft.outputs.snap}}
+    - run: |
+        cp ${{ steps.snapcraft.outputs.snap}} webots/distribution
+    - name: Publish on GitHub Release
+      if: ${{ github.event_name == 'schedule' }}
+    - run: |
+        webots/scripts/packaging/publish_release.py --key=$GITHUB_API_KEY --repo=cyberbotics/webots --branch=$WEBOTS_TARGET_BRANCH_1 --commit=$COMMIT_ID --tag=$TRAVIS_TAG
