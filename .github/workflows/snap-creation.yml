@@ -24,7 +24,7 @@ jobs:
     if: ${{ github.event_name == 'schedule' || github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
     strategy:
       matrix:
-        branch: [master, develop]
+        branch: [master]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
