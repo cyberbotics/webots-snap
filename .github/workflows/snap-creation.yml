@@ -42,7 +42,7 @@ jobs:
         python webots/scripts/packaging/set_commit_and_date_in_version.py $COMMIT_ID; fi
         # sudo snapcraft --destructive-mode
     - name: Create Snap Package
-    - uses: snapcore/action-build@v1
+      uses: snapcore/action-build@v1
       id: snapcraft
     - name: Upload Snap Package
     - uses: actions/upload-artifact@v2
