@@ -76,9 +76,11 @@ parts:
   webots:
     build-packages:
     - git
+    - python-pip
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
+    - ROS_DISTRO: "melodic"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
     source-type: local
