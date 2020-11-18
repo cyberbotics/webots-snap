@@ -94,6 +94,7 @@ parts:
     # source-tag: R2019b
     override-pull: |
       snapcraftctl pull
+      sudo apt install xvfb
       ./scripts/install/linux_optional_compilation_dependencies.sh
     stage-packages:
     - openjdk-11-jdk
