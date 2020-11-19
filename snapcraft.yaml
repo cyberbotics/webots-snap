@@ -96,8 +96,6 @@ parts:
       snapcraftctl pull
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
-      Xvfb :99 &
-      export DISPLAY=:99
     stage-packages:
     - openjdk-11-jdk
     - ca-certificates-java
