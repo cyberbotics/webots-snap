@@ -30,7 +30,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Clone Webots Repository
       run: |
-        sudo apt install git
+        sudo apt install --yes git
+        sudo snap install snapcraft --classic
+        export ROS_DISTRO=melodic
         git clone --recurse-submodules --depth 3 --single-branch --branch ${{ matrix.branch }} https://github.com/cyberbotics/webots.git
     - name: Set Commit SHA in Version
       if: ${{ github.event_name == 'schedule' }}
@@ -41,15 +43,14 @@ jobs:
         Xvfb :99 &
         export DISPLAY=:
     - name: Create Snap Package
-      uses: snapcore/action-build@v1
-      id: snapcraft
-    - name: Upload Snap Package
-      uses: actions/upload-artifact@v2
+      run: |
+        sudo snapcraft --destructive-mode
+        cp *.snap webots/distribution
+    - uses: actions/upload-artifact@v2
       with:
-        name: 'snap'
-        path: ${{ steps.snapcraft.outputs.snap}}
-    - name: Copy Snap Package in webots/distribution
-      run: cp ${{ steps.snapcraft.outputs.snap}} webots/distribution
+        name: build-${{ matrix.branch }}
+        path: |
+          distribution/*.snap
     - name: Create/Update GitHub Release
       if: ${{ github.event_name == 'schedule' || github.event_name == 'push'}}
       run: |
