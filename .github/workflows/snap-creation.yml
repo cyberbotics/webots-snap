@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   cleanup-runs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
     - uses: rokroskar/workflow-run-cleanup-action@master
       env:
@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         branch: [master]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
     - name: Install Snapcraft
@@ -52,7 +52,7 @@ jobs:
       with:
         name: build-${{ matrix.branch }}
         path: |
-          distribution/*.snap
+          webots/distribution/*.snap
     - name: Create/Update GitHub Release
       if: ${{ github.event_name == 'schedule' || github.event_name == 'push'}}
       run: |
