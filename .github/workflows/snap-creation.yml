@@ -59,7 +59,7 @@ jobs:
         export COMMIT_ID=$(cd webots; git rev-parse HEAD)
         sudo python -m pip install requests PyGithub
         webots/scripts/packaging/publish_release.py --key=${{ secrets.GITHUB_TOKEN }} --repo=cyberbotics/webots --branch=${{ matrix.branch }} --commit=$COMMIT_ID --tag=${{ github.ref }}
-  build:
+  release-tag:
     needs: cleanup-runs
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-18.04
