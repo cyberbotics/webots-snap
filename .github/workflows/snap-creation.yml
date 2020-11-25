@@ -24,7 +24,7 @@ jobs:
     if: ${{ github.event_name == 'schedule' || github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
     strategy:
       matrix:
-        branch: [master]
+        branch: [master, develop]
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
@@ -55,5 +55,6 @@ jobs:
           webots/distribution/*.snap
     - name: Create/Update GitHub Release
       run: |
+        export COMMIT_ID=$(cd webots; git rev-parse HEAD)
         sudo python -m pip install requests PyGithub
-        webots/scripts/packaging/publish_release.py --key=${{ secrets.GITHUB_TOKEN }} --repo=${{ github.repository }} --branch=${{ github.ref }} --commit=${{ github.sha }} --tag=${{ github.ref }}
+        webots/scripts/packaging/publish_release.py --key=${{ secrets.GITHUB_TOKEN }} --repo=cyberbotics/webots --branch=${{ matrix.branch }} --commit=$COMMIT_ID --tag=${{ github.ref }}
