@@ -136,6 +136,7 @@ parts:
     - libheimbase1-heimdal
     - libheimntlm0-heimdal
     - libhx509-5-heimdal
+    - libicu60
     - libjpeg8-dev
     - libkrb5-26-heimdal
     - libldap-2.4-2
