@@ -54,7 +54,6 @@ jobs:
         path: |
           webots/distribution/*.snap
     - name: Create/Update GitHub Release
-      if: ${{ github.event_name == 'schedule' || github.event_name == 'push'}}
       run: |
         sudo python -m pip install requests PyGithub
         webots/scripts/packaging/publish_release.py --key=${{ secrets.GITHUB_TOKEN }} --repo=${{ github.repository }} --branch=${{ github.ref }} --commit=${{ github.sha }} --tag=${{ github.ref }}
