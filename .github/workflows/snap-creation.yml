@@ -58,7 +58,7 @@ jobs:
       run: |
         export COMMIT_ID=$(cd webots; git rev-parse HEAD)
         sudo python -m pip install requests PyGithub
-        webots/scripts/packaging/publish_release.py --key=${{ secrets.GITHUB_TOKEN }} --repo=cyberbotics/webots --branch=${{ matrix.branch }} --commit=$COMMIT_ID --tag=${{ github.ref }}
+        webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --branch=${{ matrix.branch }} --commit=$COMMIT_ID --tag=${{ github.ref }}
   release-tag:
     needs: cleanup-runs
     if: ${{ github.event_name == 'push' }}
@@ -91,7 +91,7 @@ jobs:
       run: |
         export COMMIT_ID=$(cd webots; git rev-parse HEAD)
         sudo python -m pip install requests PyGithub
-        webots/scripts/packaging/publish_release.py --key=${{ secrets.GITHUB_TOKEN }} --repo=cyberbotics/webots --branch=${{ github.ref }} --commit=$COMMIT_ID --tag=${{ github.ref }}
+        webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --branch=${{ github.ref }} --commit=$COMMIT_ID --tag=${{ github.ref }}
     - name: Create/Update `webots-snap` GitHub Release
       run: |
         webots/scripts/packaging/publish_release.py --key=${{ secrets.GITHUB_TOKEN }} --repo=${{ github.repository }} --branch=${{ github.ref }} --commit=$COMMIT_ID --tag=${{ github.ref }}
