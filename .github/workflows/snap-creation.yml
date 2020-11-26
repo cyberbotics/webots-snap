@@ -1,0 +1,101 @@
+name: Webots Snap Package Creation
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  schedule:
+  - cron: "0 23 * * *"
+  push:
+    tags:
+      - '*'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  cleanup-runs:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: rokroskar/workflow-run-cleanup-action@master
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+  build:
+    needs: cleanup-runs
+    if: ${{ github.event_name == 'schedule' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
+    strategy:
+      matrix:
+        branch: [master, develop]
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Snapcraft
+      uses: samuelmeuli/action-snapcraft@v1
+    - name: Clone Webots Repository
+      run: |
+        sudo apt install --yes git
+        sudo snap install snapcraft --classic
+        export ROS_DISTRO=melodic
+        git clone --recurse-submodules --depth 3 --single-branch --branch ${{ matrix.branch }} https://github.com/cyberbotics/webots.git
+        export WEBOTS_VERSION=$(cat webots/scripts/packaging/webots_version.txt | sed 's/ revision /-rev/g')
+        sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
+    - name: Set Commit SHA in Version
+      if: ${{ github.event_name == 'schedule' }}
+      run: python webots/scripts/packaging/set_commit_and_date_in_version.py ${{ github.sha }}
+    - name: Setup Xvfb
+      run: |
+        sudo apt install xvfb
+        export DISPLAY=:99
+        Xvfb :99 -screen 0 1024x768x16 &
+    - name: Create Snap Package
+      run: |
+        sudo snapcraft --destructive-mode
+        cp *.snap webots/distribution
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build-${{ matrix.branch }}
+        path: |
+          webots/distribution/*.snap
+    - name: Create/Update `webots` GitHub Release
+      if: ${{ github.event_name == 'schedule' }}
+      run: |
+        export COMMIT_ID=$(cd webots; git rev-parse HEAD)
+        sudo python -m pip install requests PyGithub
+        webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --commit=$COMMIT_ID
+  release-tag:
+    needs: cleanup-runs
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Snapcraft
+      uses: samuelmeuli/action-snapcraft@v1
+    - name: Clone Webots Repository
+      run: |
+        sudo apt install --yes git
+        sudo snap install snapcraft --classic
+        export ROS_DISTRO=melodic
+        git clone --recurse-submodules --depth 3 --single-branch --branch ${{ github.ref }} https://github.com/cyberbotics/webots.git
+        export WEBOTS_VERSION=$(cat webots/resources/version.txt)
+        sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
+    - name: Setup Xvfb
+      run: |
+        sudo apt install xvfb
+        export DISPLAY=:99
+        Xvfb :99 -screen 0 1024x768x16 &
+    - name: Create Snap Package
+      run: |
+        sudo snapcraft --destructive-mode
+        cp *.snap webots/distribution
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build-${{ github.ref }}
+        path: |
+          webots/distribution/*.snap
+    - name: Create/Update `webots` GitHub Release
+      run: |
+        export COMMIT_ID=$(cd webots; git rev-parse HEAD)
+        sudo python -m pip install requests PyGithub
+        webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --branch=${{ github.ref }} --commit=$COMMIT_ID --tag=${{ github.ref }}
+    - name: Create/Update `webots-snap` GitHub Release
+      run: |
+        webots/scripts/packaging/publish_release.py --key=${{ secrets.GITHUB_TOKEN }} --repo=${{ github.repository }} --branch=${{ github.ref }} --commit=$COMMIT_ID --tag=${{ github.ref }}
