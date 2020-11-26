@@ -95,6 +95,7 @@ parts:
     override-pull: |
       snapcraftctl pull
       ./scripts/install/linux_optional_compilation_dependencies.sh
+      sudo apt install --yes xvfb
     stage-packages:
     - openjdk-11-jdk
     - ca-certificates-java
@@ -135,6 +136,7 @@ parts:
     - libheimbase1-heimdal
     - libheimntlm0-heimdal
     - libhx509-5-heimdal
+    - libicu60
     - libjpeg8-dev
     - libkrb5-26-heimdal
     - libldap-2.4-2
