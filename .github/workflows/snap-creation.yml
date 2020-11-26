@@ -36,8 +36,9 @@ jobs:
         sudo snap install snapcraft --classic
         export ROS_DISTRO=melodic
         git clone --recurse-submodules --depth 3 --single-branch --branch ${{ matrix.branch }} https://github.com/cyberbotics/webots.git
+        export WEBOTS_VERSION=$(cat webots/resources/version.txt)
+        sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
     - name: Set Commit SHA in Version
-      if: ${{ github.event_name == 'schedule' }}
       run: python scripts/packaging/set_commit_and_date_in_version.py ${{ github.sha }}
     - name: Setup Xvfb
       run: |
@@ -57,7 +58,7 @@ jobs:
       run: |
         export COMMIT_ID=$(cd webots; git rev-parse HEAD)
         sudo python -m pip install requests PyGithub
-        webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --branch=${{ matrix.branch }} --commit=$COMMIT_ID --tag=${{ github.ref }}
+        webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --tag=${{ matrix.branch }} --commit=$COMMIT_ID
   release-tag:
     needs: cleanup-runs
     if: ${{ github.event_name == 'push' }}
@@ -72,6 +73,8 @@ jobs:
         sudo snap install snapcraft --classic
         export ROS_DISTRO=melodic
         git clone --recurse-submodules --depth 3 --single-branch --branch ${{ github.ref }} https://github.com/cyberbotics/webots.git
+        export WEBOTS_VERSION=$(cat webots/resources/version.txt)
+        sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
     - name: Setup Xvfb
       run: |
         sudo apt install xvfb
