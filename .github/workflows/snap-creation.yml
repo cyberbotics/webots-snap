@@ -51,6 +51,7 @@ jobs:
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v2
+      if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') }}
       with:
         name: build-${{ matrix.branch }}
         path: |
@@ -87,6 +88,7 @@ jobs:
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v2
+      if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') }}
       with:
         name: build-${{ github.ref }}
         path: |
