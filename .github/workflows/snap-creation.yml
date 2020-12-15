@@ -30,7 +30,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install Snapcraft
       uses: samuelmeuli/action-snapcraft@v1
-    - name: Clone Webots Repository
+    - name: Clone Webots Repository (build)
       run: |
         sudo apt install --yes git
         sudo snap install snapcraft --classic
@@ -70,7 +70,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install Snapcraft
       uses: samuelmeuli/action-snapcraft@v1
-    - name: Clone Webots Repository
+    - name: Clone Webots Repository (release-tag)
       run: |
         sudo apt install --yes git
         sudo snap install snapcraft --classic
