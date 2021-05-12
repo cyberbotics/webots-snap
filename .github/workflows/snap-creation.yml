@@ -28,6 +28,12 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
+    - name: Install libzip-dev
+      run: |
+        # GitHub Actions `libzip-dev` hotfix
+        sudo apt purge libzip4
+        sudo apt autoremove
+        sudo apt install -y libzip-dev
     - name: Install Snapcraft
       uses: samuelmeuli/action-snapcraft@v1
     - name: Clone Webots Repository (build)
