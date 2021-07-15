@@ -11,8 +11,8 @@
 
 name: webots
 title: Webots
-base: core20
-version: 'R2021a'
+base: core18
+version: 'R2021b'
 summary: Webots is a free and open-source 3D robot simulator
 description: |
   Webots is a free and open-source 3D robot simulator.
@@ -76,11 +76,11 @@ parts:
   webots:
     build-packages:
     - git
-    - python3-pip
+    - python-pip
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
-    - ROS_DISTRO: "noetic"
+    - ROS_DISTRO: "melodic"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
     source-type: local
@@ -106,14 +106,14 @@ parts:
     - libasn1-8-heimdal
     - libasound2
     - libatk1.0-0
-    - libavutil56
+    - libavutil55
     - libblkid1
     - libcanberra-gtk-module
     - libcanberra-gtk3-module
     - libcrystalhd3
     - libcurl3-gnutls
     - libdbus-1-3
-    - libdouble-conversion3
+    - libdouble-conversion1
     - libdrm-common
     - libfreeimage3
     - libfreetype6
@@ -136,7 +136,7 @@ parts:
     - libheimbase1-heimdal
     - libheimntlm0-heimdal
     - libhx509-5-heimdal
-    - libicu66
+    - libicu60
     - libjpeg8-dev
     - libkrb5-26-heimdal
     - libldap-2.4-2
@@ -153,7 +153,7 @@ parts:
     - libopencore-amrwb0
     - libopus0
     - libpcre3
-    - libproj15
+    - libproj12
     - libpsl5
     - libpulse-mainloop-glib0
     - libroken18-heimdal
@@ -163,14 +163,14 @@ parts:
     - libshine3
     - libslang2
     - libsnappy1v5
-    - libsndio7.0
+    - libsndio6.1
     - libsoxr0
     - libspeex1
     - libssh-dev
     - libssh-gcrypt-4
     - libssl1.1
     - libstdc++6
-    - libswresample3
+    - libswresample2
     - libsystemd0
     - libtheora0
     - libtinfo5
@@ -186,7 +186,7 @@ parts:
     - libwind0-heimdal
     - libx11-data
     - libx11-xcb1
-    - libx265-179
+    - libx265-146
     - libxaw7
     - libxcb-glx0
     - libxcb-icccm4
@@ -240,4 +240,4 @@ apps:
     - unity7
     - x11
     desktop: usr/share/webots/resources/webots.desktop
-    command: bin/desktop-launch $SNAP/usr/share/webots/webots
+    command: desktop-launch $SNAP/usr/share/webots/webots
