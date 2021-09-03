@@ -101,6 +101,8 @@ parts:
       sudo apt install --yes openjdk-11-jdk
       which javac
       javac -version
+      printenv PATH
+      printenv JAVA_HOME
     stage-packages:
     - openjdk-11-jdk
     - ca-certificates-java
