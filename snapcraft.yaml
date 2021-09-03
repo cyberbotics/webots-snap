@@ -103,6 +103,7 @@ parts:
       javac -version
       printenv PATH
       printenv JAVA_HOME
+      update-java-alternatives -l
       sudo update-java-alternatives -s java-1.11.0-openjdk-amd64
       javac -version
       which java
