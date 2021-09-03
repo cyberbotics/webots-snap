@@ -103,6 +103,9 @@ parts:
       javac -version
       printenv PATH
       printenv JAVA_HOME
+      sudo update-java-alternatives -s java-1.11.0-openjdk-amd64
+      javac -version
+      which java
     stage-packages:
     - openjdk-11-jdk
     - ca-certificates-java
