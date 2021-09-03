@@ -98,9 +98,6 @@ parts:
       which javac
       javac -version
       sudo apt install --yes xvfb
-      sudo apt install --yes openjdk-11-jdk
-      which javac
-      javac -version
       printenv PATH
       printenv JAVA_HOME
       update-java-alternatives -l
