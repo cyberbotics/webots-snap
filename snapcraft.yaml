@@ -95,7 +95,6 @@ parts:
     override-pull: |
       snapcraftctl pull
       ./scripts/install/linux_optional_compilation_dependencies.sh
-      echo "Display Java version"
       which javac
       javac -version
       sudo apt install --yes xvfb
