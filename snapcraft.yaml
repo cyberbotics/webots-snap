@@ -95,6 +95,8 @@ parts:
     override-pull: |
       snapcraftctl pull
       ./scripts/install/linux_optional_compilation_dependencies.sh
+      which javac
+      javac -version
       sudo apt install --yes xvfb
     stage-packages:
     - openjdk-11-jdk
