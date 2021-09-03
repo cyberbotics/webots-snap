@@ -98,11 +98,6 @@ parts:
       snapcraftctl pull
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
-      which javac
-      javac -version
-      printenv PATH
-      printenv JAVA_HOME
-      update-java-alternatives -l
     stage-packages:
     - openjdk-11-jdk
     - ca-certificates-java
