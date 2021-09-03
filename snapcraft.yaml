@@ -81,6 +81,8 @@ parts:
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
     - ROS_DISTRO: "melodic"
+    - JAVA_HOME: "/usr/lib/jvm/java-1.11.0-openjdk-amd64"
+    - PATH: "$JAVA_HOME/bin:$PATH"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
     source-type: local
@@ -94,16 +96,13 @@ parts:
     # source-tag: R2019b
     override-pull: |
       snapcraftctl pull
-      ./scripts/install/linux_optional_compilation_dependencies.sh
       which javac
       javac -version
-      sudo apt install --yes xvfb
       printenv PATH
       printenv JAVA_HOME
       update-java-alternatives -l
-      sudo update-java-alternatives -s java-1.11.0-openjdk-amd64
-      javac -version
-      which java
+      ./scripts/install/linux_optional_compilation_dependencies.sh
+      sudo apt install --yes xvfb
     stage-packages:
     - openjdk-11-jdk
     - ca-certificates-java
