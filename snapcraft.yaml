@@ -81,8 +81,6 @@ parts:
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
     - ROS_DISTRO: "melodic"
-    - JAVA_HOME: "/usr/lib/jvm/java-1.11.0-openjdk-amd64"
-    - PATH: "$JAVA_HOME/bin:$PATH"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
     source-type: local
