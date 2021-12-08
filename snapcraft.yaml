@@ -31,7 +31,7 @@ architectures:
 - build-on: amd64
   run-on: amd64
 environment:
-  JAVA_HOME: "$SNAP/usr/lib/jvm/java-11-openjdk-amd64"
+  JAVA_HOME: "$SNAP/usr/lib/jvm/java-16-openjdk-amd64"
   PATH: "$JAVA_HOME/bin:$PATH"
 
 layout:
@@ -81,7 +81,7 @@ parts:
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
     - ROS_DISTRO: "noetic"
-    - JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
+    - JAVA_HOME: "/usr/lib/jvm/java-16-openjdk-amd64"
     - PATH: "$JAVA_HOME/bin:$PATH"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
@@ -99,7 +99,7 @@ parts:
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
     stage-packages:
-    - openjdk-11-jdk
+    - openjdk-16-jdk
     - ca-certificates-java
     - build-essential
     - libc6-dev
