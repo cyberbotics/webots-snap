@@ -180,6 +180,7 @@ parts:
     - libsystemd0
     - libtheora0
     - libtinfo5
+    - libtinyxml2
     - libtwolame0
     - libudev1
     - libuuid1
