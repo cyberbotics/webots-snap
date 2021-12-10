@@ -105,7 +105,7 @@ parts:
     - libc6-dev
     - ffmpeg
     - freeglut3-dev
-    - libarmadillo-dev
+    - libaribb24-0
     - libasn1-8-heimdal
     - libasound2
     - libatk1.0-0
@@ -139,7 +139,6 @@ parts:
     - libssh-4
     - libgtk-3-0
     - libhcrypto4-heimdal
-    - libhdf4-0-alt
     - libheimbase1-heimdal
     - libheimntlm0-heimdal
     - libhx509-5-heimdal
@@ -161,6 +160,7 @@ parts:
     - libopus0
     - libpcre3
     - libproj15
+    - libproj-dev
     - libpsl5
     - libpulse-mainloop-glib0
     - libroken18-heimdal
@@ -249,3 +249,4 @@ apps:
     - x11
     desktop: usr/share/webots/resources/webots.desktop
     command: bin/desktop-launch $SNAP/usr/share/webots/webots
+    extensions: [ros1-noetic]
