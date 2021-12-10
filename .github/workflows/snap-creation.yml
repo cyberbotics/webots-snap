@@ -54,7 +54,7 @@ jobs:
         Xvfb :99 -screen 0 1024x768x16 &
     - name: Create Snap Package
       run: |
-        sudo snapcraft --destructive-mode
+        sudo snapcraft --destructive-mode --enable-experimental-extensions
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v2
       if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') }}
@@ -70,7 +70,7 @@ jobs:
         webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --commit=$COMMIT_ID
   release-tag:
     needs: cleanup-runs
-    if: ${{ github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'test creation')}}
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
@@ -91,7 +91,7 @@ jobs:
         Xvfb :99 -screen 0 1024x768x16 &
     - name: Create Snap Package
       run: |
-        sudo snapcraft --destructive-mode
+        sudo snapcraft --destructive-mode --enable-experimental-extensions
         cp *.snap webots/distribution
     - name: Create/Update `webots` GitHub Release
       run: |

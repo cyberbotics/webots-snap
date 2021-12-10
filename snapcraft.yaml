@@ -45,34 +45,6 @@ layout:
     bind: $SNAP/usr/share/libdrm
 
 parts:
-  desktop-gtk3:
-    build-packages:
-    - build-essential
-    - libgtk-3-dev
-    make-parameters:
-    - FLAVOR=gtk3
-    plugin: make
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: gtk
-    stage-packages:
-    - ttf-ubuntu-font-family
-    - dmz-cursor-theme
-    - light-themes
-    - adwaita-icon-theme
-    - gnome-themes-standard
-    - shared-mime-info
-    - libgtk-3-0
-    - libgdk-pixbuf2.0-0
-    - libglib2.0-bin
-    - libgtk2.0-0
-    - libgtk-3-bin
-    - unity-gtk3-module
-    - libappindicator3-1
-    - xdg-user-dirs
-    - ibus-gtk3
-    - libibus-1.0-5
-    - fcitx-frontend-gtk3
-
   webots:
     build-packages:
     - git
@@ -137,7 +109,6 @@ parts:
     - libgsm1
     - libgssapi3-heimdal
     - libssh-4
-    - libgtk-3-0
     - libhcrypto4-heimdal
     - libheimbase1-heimdal
     - libheimntlm0-heimdal
@@ -248,6 +219,7 @@ apps:
     - unity7
     - x11
     desktop: usr/share/webots/resources/webots.desktop
+    extensions: [gnome-3-38]
     command-chain:
        - bin/desktop-launch
     command: usr/share/webots/webots
