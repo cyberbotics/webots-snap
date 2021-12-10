@@ -159,7 +159,6 @@ parts:
     - libopencore-amrwb0
     - libopus0
     - libpcre3
-    - libPocoFoundation-dev
     - libproj15
     - libproj-dev
     - libpsl5
