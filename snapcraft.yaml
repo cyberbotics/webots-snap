@@ -244,9 +244,11 @@ apps:
     - joystick
     - network
     - opengl
-    - pulseaudio
     - wayland
     - unity7
     - x11
     desktop: usr/share/webots/resources/webots.desktop
-    command: bin/desktop-launch $SNAP/usr/share/webots/webots
+    command-chain:
+       - bin/desktop-launch
+    command: usr/share/webots/webots
+    adapter: none
