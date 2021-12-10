@@ -70,7 +70,7 @@ jobs:
         webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --commit=$COMMIT_ID
   release-tag:
     needs: cleanup-runs
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'test creation')}}
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
