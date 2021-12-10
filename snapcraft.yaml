@@ -80,6 +80,7 @@ parts:
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
+    - ROS_DISTRO: "noetic"
     - JAVA_HOME: "/usr/lib/jvm/java-16-openjdk-amd64"
     - PATH: "$JAVA_HOME/bin:$PATH"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
@@ -158,6 +159,7 @@ parts:
     - libopencore-amrwb0
     - libopus0
     - libpcre3
+    - libPocoFoundation-dev
     - libproj15
     - libproj-dev
     - libpsl5
@@ -249,4 +251,3 @@ apps:
     - x11
     desktop: usr/share/webots/resources/webots.desktop
     command: bin/desktop-launch $SNAP/usr/share/webots/webots
-    extensions: [ros1-noetic]
