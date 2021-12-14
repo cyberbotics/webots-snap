@@ -12,7 +12,7 @@
 name: webots
 title: Webots
 base: core20
-version: 'R2022a'
+adopt-info: 'webots'
 summary: Webots is a free and open-source 3D robot simulator
 description: |
   Webots is a free and open-source 3D robot simulator.
@@ -39,40 +39,10 @@ layout:
     bind: $SNAP/etc/openal
   /usr/include:  # to allow gcc compiler to find system include files
     bind: $SNAP/usr/include
-  /usr/lib/x86_64-linux-gnu:  # to allow gcc linker to find the necessary libraries
-    bind: $SNAP/usr/lib/x86_64-linux-gnu
   /usr/share/libdrm:  # to fix a warning displayed by Webots on AMD GPUs
     bind: $SNAP/usr/share/libdrm
 
 parts:
-  desktop-gtk3:
-    build-packages:
-    - build-essential
-    - libgtk-3-dev
-    make-parameters:
-    - FLAVOR=gtk3
-    plugin: make
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: gtk
-    stage-packages:
-    - ttf-ubuntu-font-family
-    - dmz-cursor-theme
-    - light-themes
-    - adwaita-icon-theme
-    - gnome-themes-standard
-    - shared-mime-info
-    - libgtk-3-0
-    - libgdk-pixbuf2.0-0
-    - libglib2.0-bin
-    - libgtk2.0-0
-    - libgtk-3-bin
-    - unity-gtk3-module
-    - libappindicator3-1
-    - xdg-user-dirs
-    - ibus-gtk3
-    - libibus-1.0-5
-    - fcitx-frontend-gtk3
-
   webots:
     build-packages:
     - git
@@ -98,11 +68,12 @@ parts:
       snapcraftctl pull
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
+      snapcraftctl set-version R2022a
     stage-packages:
     - openjdk-16-jdk
     - ca-certificates-java
     - build-essential
-    - libc6-dev
+    - libc6
     - ffmpeg
     - freeglut3-dev
     - libaribb24-0
@@ -227,6 +198,7 @@ parts:
     - zlib1g
 apps:
   webots:
+    extensions: [gnome-3-38]
     environment:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
@@ -234,18 +206,13 @@ apps:
     plugs:
       - audio-playback
       - browser-support
-      - desktop
-      - desktop-legacy
       - gsettings
       - hidraw
       - home
       - hostname-control
       - joystick
       - network
-      - opengl
-      - wayland
       - unity7
-      - x11
     desktop: usr/share/webots/resources/webots.desktop
     command-chain:
       - bin/desktop-launch
