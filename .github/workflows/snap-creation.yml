@@ -54,6 +54,7 @@ jobs:
         Xvfb :99 -screen 0 1024x768x16 &
     - name: Create Snap Package
       run: |
+        sudo apt update --yes
         sudo snapcraft --destructive-mode --enable-experimental-extensions
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v2
