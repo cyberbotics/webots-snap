@@ -73,7 +73,7 @@ parts:
     - openjdk-16-jdk
     - ca-certificates-java
     - build-essential
-    - libc6
+    - libc6-dev
     - ffmpeg
     - freeglut3-dev
     - libaribb24-0
@@ -133,7 +133,6 @@ parts:
     - libproj15
     - libproj-dev
     - libpsl5
-    - libpulse-mainloop-glib0
     - libroken18-heimdal
     - librtmp1
     - libsasl2-2
