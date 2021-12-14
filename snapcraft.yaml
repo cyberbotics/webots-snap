@@ -225,7 +225,6 @@ parts:
     - zlib1g
 apps:
   webots:
-    adapter: none
     extensions: [gnome-3-38]
     environment:
       LANG: C.UTF-8
