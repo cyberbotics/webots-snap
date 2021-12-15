@@ -70,7 +70,7 @@ parts:
     - ibus-gtk3
     - libibus-1.0-5
     - fcitx-frontend-gtk3
-    
+  
   webots:
     build-packages:
     - git
@@ -223,6 +223,7 @@ parts:
     - lsb-release
     - util-linux
     - zlib1g
+
 apps:
   webots:
     extensions: [gnome-3-38]
