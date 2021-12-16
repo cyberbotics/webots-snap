@@ -39,8 +39,8 @@ layout:
     bind: $SNAP/etc/openal
   /usr/include:  # to allow gcc compiler to find system include files
     bind: $SNAP/usr/include
-  /usr/lib/x86_64-linux-gnu:  # to allow gcc linker to find the necessary libraries
-    bind: $SNAP/usr/lib/x86_64-linux-gnu
+  /usr/lib:  # to allow gcc linker to find the necessary libraries
+    bind: $SNAP/usr/lib
   /usr/share/libdrm:  # to fix a warning displayed by Webots on AMD GPUs
     bind: $SNAP/usr/share/libdrm
 
