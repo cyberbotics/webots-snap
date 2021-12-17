@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   cleanup-runs:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
     - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
       env:
@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         branch: [master, develop]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
     - name: Install libzip-dev
@@ -40,7 +40,7 @@ jobs:
       run: |
         sudo apt install --yes git
         sudo snap install snapcraft --classic
-        export ROS_DISTRO=noetic
+        export ROS_DISTRO=melodic
         git clone --recurse-submodules --depth 3 --single-branch --branch ${{ matrix.branch }} https://github.com/cyberbotics/webots.git
         export WEBOTS_VERSION=$(cat webots/scripts/packaging/webots_version.txt | sed 's/ revision /-rev/g')
         sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
@@ -54,8 +54,7 @@ jobs:
         Xvfb :99 -screen 0 1024x768x16 &
     - name: Create Snap Package
       run: |
-        sudo apt update --yes
-        sudo snapcraft --destructive-mode --enable-experimental-extensions
+        sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v2
       if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') }}
@@ -72,7 +71,7 @@ jobs:
   release-tag:
     needs: cleanup-runs
     if: ${{ github.event_name == 'push' }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
     - name: Install Snapcraft
@@ -81,7 +80,7 @@ jobs:
       run: |
         sudo apt install --yes git
         sudo snap install snapcraft --classic
-        export ROS_DISTRO=noetic
+        export ROS_DISTRO=melodic
         git clone --recurse-submodules --depth 3 --single-branch --branch ${GITHUB_REF#refs/tags/} https://github.com/cyberbotics/webots.git
         export WEBOTS_VERSION=$(cat webots/scripts/packaging/webots_version.txt | sed 's/ revision /-rev/g')
         sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
@@ -92,7 +91,7 @@ jobs:
         Xvfb :99 -screen 0 1024x768x16 &
     - name: Create Snap Package
       run: |
-        sudo snapcraft --destructive-mode --enable-experimental-extensions
+        sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - name: Create/Update `webots` GitHub Release
       run: |
