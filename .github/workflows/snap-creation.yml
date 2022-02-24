@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   cleanup-runs:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
       env:
@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         branch: [master, develop]
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: Install libzip-dev
@@ -71,7 +71,7 @@ jobs:
   release-tag:
     needs: cleanup-runs
     if: ${{ github.event_name == 'push' }}
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: Install Snapcraft
