@@ -96,7 +96,7 @@ parts:
     # source-tag: R2022a
     override-pull: |
       snapcraftctl pull
-      # ./scripts/install/linux_optional_compilation_dependencies.sh
+      ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
       snapcraftctl set-version R2022b
     stage-packages:
