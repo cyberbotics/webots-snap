@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   cleanup-runs:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
       env:
@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         branch: [master, develop]
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: Install libzip-dev
@@ -44,6 +44,7 @@ jobs:
         git clone --recurse-submodules --depth 3 --single-branch --branch ${{ matrix.branch }} https://github.com/cyberbotics/webots.git
         export WEBOTS_VERSION=$(cat webots/scripts/packaging/webots_version.txt | sed 's/ revision /-rev/g')
         sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
+        sed -i "s/set-version\s*R[0-9]\{4\}[a-z].*/set-version $WEBOTS_VERSION/g" snapcraft.yaml
     - name: Set Commit SHA in Version
       if: ${{ github.event_name == 'schedule' }}
       run: python webots/scripts/packaging/set_commit_and_date_in_version.py ${{ github.sha }}
@@ -71,7 +72,7 @@ jobs:
   release-tag:
     needs: cleanup-runs
     if: ${{ github.event_name == 'push' }}
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: Install Snapcraft
