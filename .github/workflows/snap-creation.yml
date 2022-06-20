@@ -93,5 +93,4 @@ jobs:
     - name: Create/Update `webots` GitHub Release
       run: |
         export COMMIT_ID=$(cd webots; git rev-parse HEAD)
-        sudo python -m pip install requests PyGithub
 
