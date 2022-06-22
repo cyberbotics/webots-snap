@@ -32,7 +32,7 @@ jobs:
         sudo apt install --yes git
         sudo snap install snapcraft --classic
         export ROS_DISTRO=melodic
-        git clone --recurse-submodules --depth 3 --single-branch --branch test-snap-creation https://github.com/cyberbotics/webots.git
+        git clone --recurse-submodules --depth 3 --single-branch --branch ${{ matrix.branch }} https://github.com/cyberbotics/webots.git
         export WEBOTS_VERSION=$(cat webots/scripts/packaging/webots_version.txt | sed 's/ revision /-rev/g')
         sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
         sed -i "s/set-version\s*R[0-9]\{4\}[a-z].*/set-version $WEBOTS_VERSION/g" snapcraft.yaml
