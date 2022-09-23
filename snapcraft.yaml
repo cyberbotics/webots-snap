@@ -145,7 +145,7 @@ parts:
     - libheimntlm0-heimdal
     - libhx509-5-heimdal
     - libicu66
-    - libjpeg*
+    - libjpeg-turbo-devel
     - libkrb5-26-heimdal
     - libldap-2.4-2
     - libltdl7
