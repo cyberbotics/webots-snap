@@ -99,6 +99,7 @@ parts:
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
       snapcraftctl set-version R2022b
+    # libjpeg is conflicting with the one from desktop-gtk3, therefore it is ignored
     stage:
     - -usr/lib/x86_64-linux-gnu/libjpeg.so.8.2.2
     stage-packages:
