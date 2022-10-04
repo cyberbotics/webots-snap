@@ -226,6 +226,8 @@ parts:
     - lsb-release
     - util-linux
     - zlib1g
+    stage:
+    - usr/lib/x86_64-linux-gnu/libjpeg.so.8.2.2
 
 apps:
   webots:
