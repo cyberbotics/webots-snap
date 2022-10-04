@@ -54,7 +54,7 @@ parts:
     plugin: make
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: gtk
-    # libjpeg is conflicting with the one from desktop-gtk3, therefore it is ignored
+    # libjpeg is conflicting with the one from webots, therefore it is ignored
     stage:
     - -usr/lib/x86_64-linux-gnu/libjpeg.so.8.2.2
     stage-packages:
