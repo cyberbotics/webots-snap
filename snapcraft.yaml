@@ -145,7 +145,6 @@ parts:
     - libheimntlm0-heimdal
     - libhx509-5-heimdal
     - libicu66
-    - libjpeg8-dev
     - libkrb5-26-heimdal
     - libldap-2.4-2
     - libltdl7
@@ -226,8 +225,6 @@ parts:
     - lsb-release
     - util-linux
     - zlib1g
-    stage:
-    - usr/lib/x86_64-linux-gnu/libjpeg.so.8.2.2
 
 apps:
   webots:
