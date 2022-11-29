@@ -102,6 +102,9 @@ parts:
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
       snapcraftctl set-version R2023a
+    override-prime: |
+      snapcraftctl prime
+      rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
     stage-packages:
     - openjdk-16-jdk
     - ca-certificates-java
