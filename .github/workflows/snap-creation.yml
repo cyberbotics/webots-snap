@@ -58,8 +58,9 @@ jobs:
       if: ${{ github.event_name == 'schedule' }}
       run: |
         export COMMIT_ID=$(cd webots; git rev-parse HEAD)
+        sudo python -m pip install pip --upgrade
         sudo python -m pip install requests PyGithub
-        pip install pyopenssl --upgrade
+        sudo python -m pip install pyopenssl --upgrade
         webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --commit=$COMMIT_ID
   release-tag:
     if: ${{ github.event_name == 'push' }}
@@ -88,5 +89,7 @@ jobs:
     - name: Create/Update `webots` GitHub Release
       run: |
         export COMMIT_ID=$(cd webots; git rev-parse HEAD)
+        sudo python -m pip install pip --upgrade
         sudo python -m pip install requests PyGithub
+        sudo python -m pip install pyopenssl --upgrade
         webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --branch=${{ github.ref }} --commit=$COMMIT_ID --tag=${{ github.ref }}
