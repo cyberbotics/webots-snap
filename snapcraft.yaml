@@ -152,6 +152,7 @@ parts:
     - libldap-2.4-2
     - libltdl7
     - liblzma5
+    - libminizip1
     - libmount1
     - libmp3lame0
     - libnghttp2-14
