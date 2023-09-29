@@ -84,7 +84,9 @@ jobs:
         Xvfb :99 -screen 0 1024x768x16 &
     - name: Create Snap Package
       run: |
+        df -h
         sudo snapcraft --destructive-mode
+        df -h
         cp *.snap webots/distribution
     - name: Create/Update `webots` GitHub Release
       run: |
