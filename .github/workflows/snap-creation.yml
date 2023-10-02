@@ -29,7 +29,7 @@ jobs:
       uses: samuelmeuli/action-snapcraft@v1
     - name: Clone Webots Repository (build)
       run: |
-        df- h
+        df -h
         sudo apt install --yes git
         sudo snap install snapcraft --classic
         export ROS_DISTRO=noetic
@@ -49,7 +49,7 @@ jobs:
     - name: Create Snap Package
       run: |
         sudo snapcraft --destructive-mode
-        df- h
+        df -h
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v2
       if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') }}
