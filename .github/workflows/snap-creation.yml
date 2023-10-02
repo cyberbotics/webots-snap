@@ -82,6 +82,7 @@ jobs:
         sudo apt install xvfb
         export DISPLAY=:99
         Xvfb :99 -screen 0 1024x768x16 &
+        echo "test"
         df -h
     - name: Create Snap Package
       run: |
