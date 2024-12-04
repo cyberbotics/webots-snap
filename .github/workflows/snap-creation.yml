@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, labeled, unlabeled]
   schedule:
-  - cron: "0 23 * * *"
+    - cron: "0 23 * * *"
   push:
     tags:
       - '*'
@@ -47,7 +47,7 @@ jobs:
       run: |
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') }}
       with:
         name: build-${{ matrix.branch }}
