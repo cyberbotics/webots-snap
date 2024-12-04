@@ -175,7 +175,7 @@ parts:
     - libspeex1
     - libssh-dev
     - libssh-gcrypt-4
-    - libssl1.1
+    - libssl3
     - libstdc++6
     - libswresample3
     - libsystemd0
