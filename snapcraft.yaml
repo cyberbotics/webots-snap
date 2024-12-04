@@ -130,7 +130,7 @@ parts:
     - libgcc1
     - libgcrypt20
     - libgd3
-    - libgfortran4
+    - libgfortran5
     - libglib2.0-0
     - libgl1
     - libglu1-mesa
