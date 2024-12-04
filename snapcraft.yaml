@@ -147,7 +147,7 @@ parts:
     - libicu70
     - libjpeg8-dev
     - libkrb5-26-heimdal
-    - libldap-2.4-2
+    - libldap-2.5-0
     - libltdl7
     - liblzma5
     - libminizip1
