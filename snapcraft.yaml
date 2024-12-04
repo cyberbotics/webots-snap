@@ -105,7 +105,7 @@ parts:
       snapcraftctl prime
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
     stage-packages:
-    - openjdk-16-jdk
+    - openjdk-18-jdk
     - ca-certificates-java
     - build-essential
     - libc6-dev
