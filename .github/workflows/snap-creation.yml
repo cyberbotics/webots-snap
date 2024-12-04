@@ -39,6 +39,7 @@ jobs:
         export WEBOTS_VERSION=$(cat webots/scripts/packaging/webots_version.txt | sed 's/ revision /-rev/g')
         sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
         sed -i "s/set-version\s*R[0-9]\{4\}[a-z].*/set-version $WEBOTS_VERSION/g" snapcraft.yaml
+        sed -i "s/ttf-ubuntu-font-family/fonts-ubuntu/g" snapcraft.yaml
     - name: Set Commit SHA in Version
       if: ${{ github.event_name == 'schedule' }}
       run: python webots/scripts/packaging/set_commit_and_date_in_version.py ${{ github.sha }}
@@ -83,6 +84,7 @@ jobs:
         git clone --recurse-submodules --depth 3 --single-branch --branch ${GITHUB_REF#refs/tags/} https://github.com/cyberbotics/webots.git
         export WEBOTS_VERSION=$(cat webots/scripts/packaging/webots_version.txt | sed 's/ revision /-rev/g')
         sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
+        sed -i "s/ttf-ubuntu-font-family/fonts-ubuntu/g" snapcraft.yaml
     - name: Setup Xvfb
       run: |
         sudo apt install xvfb
