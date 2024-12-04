@@ -80,6 +80,7 @@ parts:
     build-packages:
     - git
     - python3-pip
+    - python3
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
@@ -106,7 +107,6 @@ parts:
       snapcraftctl prime
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
     stage-packages:
-    - python3
     - openjdk-18-jdk
     - ca-certificates-java
     - build-essential
