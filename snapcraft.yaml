@@ -80,13 +80,11 @@ parts:
     build-packages:
     - git
     - python3-pip
-    - python3
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
     - JAVA_HOME: "/usr/lib/jvm/java-18-openjdk-amd64"
     - PATH: "$JAVA_HOME/bin:$PATH"
-    - PYTHONPATH: "$SNAP/usr/lib/python3.8:$SNAP/usr/lib/python3/dist-packages"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
     source-type: local
@@ -102,7 +100,7 @@ parts:
       snapcraftctl pull
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
-      snapcraftctl set-version R2023b
+      snapcraftctl set-version R2025a
     override-prime: |
       snapcraftctl prime
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
