@@ -85,6 +85,7 @@ parts:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
     - JAVA_HOME: "/usr/lib/jvm/java-18-openjdk-amd64"
     - PATH: "$JAVA_HOME/bin:$PATH"
+    - PYTHONPATH: "$SNAP/usr/lib/python3.8:$SNAP/usr/lib/python3/dist-packages"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
     source-type: local
@@ -106,8 +107,6 @@ parts:
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
     stage-packages:
     - python3
-    - python3-encodings
-    - python3-distutils
     - openjdk-18-jdk
     - ca-certificates-java
     - build-essential
