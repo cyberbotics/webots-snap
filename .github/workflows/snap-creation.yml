@@ -46,6 +46,7 @@ jobs:
     - name: Create Snap Package
       run: |
         sudo lsb_release -a
+        export PYTHONHOME=/usr
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v3
@@ -84,6 +85,7 @@ jobs:
     - name: Create Snap Package
       run: |
         sudo lsb_release -a
+        export PYTHONHOME=/usr
         sudo snapcraft ----destructive-mode
         cp *.snap webots/distribution
     - name: Create/Update `webots` GitHub Release
