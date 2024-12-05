@@ -24,7 +24,7 @@ defaults:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'schedule' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
+    if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
     strategy:
       matrix:
         branch: [master, develop]
@@ -56,7 +56,7 @@ jobs:
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v3
-      if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') }}
+      if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') || github.event_name == 'workflow_dispatch'}}
       with:
         name: build-${{ matrix.branch }}
         path: |
