@@ -1,5 +1,11 @@
 name: Webots Snap Package Creation
 on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to build"
+        required: false
+        default: "master"
   pull_request:
     types: [opened, synchronize, reopened, labeled, unlabeled]
   schedule:
@@ -7,12 +13,6 @@ on:
   push:
     tags:
       - '*'
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: "Branch to build"
-        required: false
-        default: "master"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
