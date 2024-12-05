@@ -2,6 +2,11 @@ name: Webots Snap Package Creation
 on:
   workflow_dispatch:
     inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
       branch:
         description: "Branch to build"
         required: false
@@ -49,6 +54,9 @@ jobs:
         sudo apt install xvfb
         export DISPLAY=:99
         Xvfb :99 -screen 0 1024x768x16 &
+    - name: Start tmate session (Debugging)
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+      uses: mxschmitt/action-tmate@v3
     - name: Create Snap Package
       run: |
         sudo lsb_release -a
