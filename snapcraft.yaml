@@ -85,6 +85,7 @@ parts:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
     - JAVA_HOME: "/usr/lib/jvm/java-18-openjdk-amd64"
     - PATH: "$JAVA_HOME/bin:$PATH"
+    - PYTHONHOME: "/usr"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
     source-type: local
