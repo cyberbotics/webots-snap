@@ -45,7 +45,8 @@ jobs:
         Xvfb :99 -screen 0 1024x768x16 &
     - name: Create Snap Package
       run: |
-        sudo snapcraft --destructive-mode --debug
+        sudo lsb_release -a
+        sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v3
       if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') }}
@@ -83,7 +84,7 @@ jobs:
     - name: Create Snap Package
       run: |
         sudo lsb_release -a
-        sudo snapcraft ----destructive-mode --debug
+        sudo snapcraft ----destructive-mode
         cp *.snap webots/distribution
     - name: Create/Update `webots` GitHub Release
       run: |
