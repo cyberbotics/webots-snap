@@ -7,7 +7,12 @@ on:
   push:
     tags:
       - '*'
-  workflow_dispatch:  # Added for manual triggering
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to build"
+        required: false
+        default: "master"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
