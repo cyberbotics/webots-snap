@@ -228,7 +228,6 @@ parts:
 
 apps:
   webots:
-    extensions: [gnome-42]
     environment:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
