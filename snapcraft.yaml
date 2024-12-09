@@ -13,6 +13,7 @@ name: webots
 title: Webots
 base: core22
 version: 'R2025a'
+adopt-info: webots
 summary: Webots is a free and open-source 3D robot simulator
 description: |
   Webots is a free and open-source 3D robot simulator.
@@ -99,10 +100,10 @@ parts:
     # We should specify either the source-branch or the source-tag, but not both
     # source-tag: R2023b
     override-pull: |
-      snapcraftctl pull
+      craftctl default
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
-      snapcraftctl set-version R2025a
+      craftctl set "$(git describe --tags || echo 'dev')"
     override-prime: |
       craftctl default
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
