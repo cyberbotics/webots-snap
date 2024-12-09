@@ -28,7 +28,8 @@ license: Apache-2.0
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
 architectures:
-- build-on: amd64
+- build-on: [amd64]
+  build-for: [amd64]
 environment:
   JAVA_HOME: "$SNAP/usr/lib/jvm/java-16-openjdk-amd64"
   PATH: "$JAVA_HOME/bin:$PATH"
