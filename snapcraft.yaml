@@ -31,7 +31,7 @@ architectures:
 - build-on: [amd64]
   build-for: [amd64]
 environment:
-  JAVA_HOME: "$SNAP/usr/lib/jvm/java-16-openjdk-amd64"
+  JAVA_HOME: "$SNAP/usr/lib/jvm/java-18-openjdk-amd64"
   PATH: "$JAVA_HOME/bin:$PATH"
 
 layout:
@@ -41,8 +41,10 @@ layout:
     bind: $SNAP/usr/include
   /usr/share/libdrm:  # to fix a warning displayed by Webots on AMD GPUs
     bind: $SNAP/usr/share/libdrm
-  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a:
-    bind-file: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a
+  /usr/lib/$CRAFT_ARCH_TRIPLET/libc_nonshared.a:
+    bind-file: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/libc_nonshared.a
+    # bind-file: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a
+
 
 parts:
   desktop-gtk3:
@@ -97,12 +99,12 @@ parts:
     # We should specify either the source-branch or the source-tag, but not both
     # source-tag: R2023b
     override-pull: |
-      snapcraftctl pull
+      craftctl default
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
-      snapcraftctl set-version R2025a
+      craftctl set version=R2025a
     override-prime: |
-      snapcraftctl prime
+      craftctl default
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
     stage-packages:
     - openjdk-18-jdk
@@ -226,7 +228,7 @@ parts:
 
 apps:
   webots:
-    extensions: [gnome-3-38]
+    extensions: [gnome-42]
     environment:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8

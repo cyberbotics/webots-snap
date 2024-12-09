@@ -99,6 +99,9 @@ jobs:
     - name: Create Snap Package
       run: |
         sudo lsb_release -a
+        sudo snap refresh snapcraft
+        snapcraft --version
+        snapcraft extensions
         export PYTHONHOME=/usr
         sudo snapcraft ----destructive-mode
         cp *.snap webots/distribution
