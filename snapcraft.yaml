@@ -197,6 +197,7 @@ parts:
     - libx11-xcb1
     - libx265-199
     - libxaw7
+    - libxcb-cursor0
     - libxcb-glx0
     - libxcb-icccm4
     - libxcb-image0
