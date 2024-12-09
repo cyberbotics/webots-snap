@@ -103,7 +103,8 @@ parts:
       craftctl default
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
-      VERSION=$(git describe --tags || echo "nightly")
+      VERSION=$(git describe --tags | sed 's/_/-/g' || echo "nightly")
+      VERSION=$(echo "$VERSION" | sed 's/_/-/g')
       craftctl set version="$VERSION"
     override-prime: |
       craftctl default
