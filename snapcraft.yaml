@@ -99,10 +99,10 @@ parts:
     # We should specify either the source-branch or the source-tag, but not both
     # source-tag: R2023b
     override-pull: |
-      craftctl default
+      snapcraftctl pull
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
-      craftctl set version=R2025a
+      snapcraftctl set-version R2025a
     override-prime: |
       craftctl default
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs

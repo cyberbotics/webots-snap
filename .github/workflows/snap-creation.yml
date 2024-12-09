@@ -14,7 +14,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, labeled, unlabeled]
   schedule:
-    - cron: "0 23 * * *"
+  - cron: "0 23 * * *"
   push:
     tags:
       - '*'
@@ -60,10 +60,6 @@ jobs:
     - name: Create Snap Package
       run: |
         sudo lsb_release -a
-        export PYTHONHOME=/usr
-        sudo snap refresh snapcraft
-        snapcraft --version
-        snapcraft extensions
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v3
