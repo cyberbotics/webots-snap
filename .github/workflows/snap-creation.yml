@@ -62,7 +62,7 @@ jobs:
         sudo lsb_release -a
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') || github.event_name == 'workflow_dispatch'}}
       with:
         name: build-${{ matrix.branch }}
@@ -97,7 +97,6 @@ jobs:
         Xvfb :99 -screen 0 1024x768x16 &
     - name: Create Snap Package
       run: |
-        export PYTHONHOME=/usr
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - name: Create/Update `webots` GitHub Release
