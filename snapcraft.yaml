@@ -226,6 +226,10 @@ parts:
     - lsb-release
     - util-linux
     - zlib1g
+    - libfontconfig1-dev
+    - xclip
+    - mesa-vulkan-drivers
+    - libgl1-mesa-dri
 
 apps:
   webots:
