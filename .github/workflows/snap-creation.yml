@@ -59,6 +59,7 @@ jobs:
       uses: mxschmitt/action-tmate@v3
     - name: Create Snap Package
       run: |
+        sudo apt install -y lsb-release
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v4
