@@ -78,9 +78,6 @@ parts:
     - ibus-gtk3
     - libibus-1.0-5
     - fcitx-frontend-gtk3
-    - shared-mime-info
-    - adwaita-icon-theme-full
-    - libgdk-pixbuf2.0-bin
 
   webots:
     build-packages:
@@ -109,7 +106,6 @@ parts:
     override-prime: |
       craftctl default
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
-      update-mime-database $SNAP/usr/share/mime
     stage-packages:
     - openjdk-18-jdk
     - ca-certificates-java
@@ -230,7 +226,6 @@ parts:
     - lsb-release
     - util-linux
     - zlib1g
-    - libgdk-pixbuf2.0-0
 
 apps:
   webots:
@@ -248,10 +243,6 @@ apps:
       - joystick
       - network
       - unity7
-      - accessibility
-      - dbus
-      - opengl
-      - removable-media
     desktop: usr/share/webots/resources/webots.desktop
     command-chain:
       - bin/desktop-launch
