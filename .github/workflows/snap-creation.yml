@@ -32,7 +32,7 @@ jobs:
     if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
     strategy:
       matrix:
-        branch: [master, develop]
+        branch: [fix-test-suite-ubuntu24.04, fix-test-suite-ubuntu24.04]
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
