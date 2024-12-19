@@ -103,10 +103,14 @@ parts:
       craftctl default
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
+      python3 -m pip install aqtinstall
+      pip3 install distro
+      apt install python3-distro
     override-prime: |
       craftctl default
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
     stage-packages:
+    - lsb-release
     - openjdk-18-jdk
     - ca-certificates-java
     - build-essential
@@ -226,9 +230,14 @@ parts:
     - lsb-release
     - util-linux
     - zlib1g
+    - libfontconfig1-dev
+    - xclip
+    - mesa-vulkan-drivers
+    - libgl1-mesa-dri
 
 apps:
   webots:
+    extensions: [gnome]
     environment:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
