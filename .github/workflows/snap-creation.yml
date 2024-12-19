@@ -33,6 +33,13 @@ jobs:
     strategy:
       matrix:
         branch: [fix-test-suite-ubuntu24.04, fix-test-suite-ubuntu24.04]
+        # it should target a branch that this lines are added to qt_linux_installer.sh
+        # pip install --no-input aqtinstall
+        # export PATH="$PATH:$HOME/.local/bin"
+        # sudo apt update
+        # sudo apt install -y lsb-release python3-distro
+        # sudo apt install python3-distro
+        # pip3 install distro
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
@@ -59,7 +66,7 @@ jobs:
       uses: mxschmitt/action-tmate@v3
     - name: Create Snap Package
       run: |
-        sudo apt install -y lsb-release
+        sudo lsb_release -a
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
     - uses: actions/upload-artifact@v4

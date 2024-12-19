@@ -48,37 +48,6 @@ layout:
 
 
 parts:
-  desktop-gtk3:
-    build-packages:
-    - build-essential
-    - libgtk-3-dev
-    make-parameters:
-    - FLAVOR=gtk3
-    plugin: make
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: gtk
-    # libjpeg is conflicting with the one from webots, therefore it is ignored
-    stage:
-    - -usr/lib/x86_64-linux-gnu/libjpeg.so.8.2.2
-    stage-packages:
-    - fonts-ubuntu
-    - dmz-cursor-theme
-    - light-themes
-    - adwaita-icon-theme
-    - gnome-themes-standard
-    - shared-mime-info
-    - libgtk-3-0
-    - libgdk-pixbuf2.0-0
-    - libglib2.0-bin
-    - libgtk2.0-0
-    - libgtk-3-bin
-    - unity-gtk3-module
-    - libappindicator3-1
-    - xdg-user-dirs
-    - ibus-gtk3
-    - libibus-1.0-5
-    - fcitx-frontend-gtk3
-
   webots:
     build-packages:
     - git
