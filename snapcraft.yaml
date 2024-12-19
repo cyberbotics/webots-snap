@@ -21,7 +21,7 @@ description: |
   actuators and objects are provided, but you can create your own. Collision
   detections, rigid body dynamics and fluid dynamics rely on a modified version
   of the ODE physics engine. The robot controller programs can be written
-  outside of Webots in C, C++, Python, ROS, Java or MATLAB using a simple API.
+  outside of Webots in C, C++, Python, Java or MATLAB using a simple API.
   Webots features a 3D web interface allowing you to publish simulations online.
 icon: webots.png
 license: Apache-2.0
@@ -83,7 +83,6 @@ parts:
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
-    - ROS_DISTRO: "noetic"
     - JAVA_HOME: "/usr/lib/jvm/java-16-openjdk-amd64"
     - PATH: "$JAVA_HOME/bin:$PATH"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
@@ -177,6 +176,8 @@ parts:
     - libssh-dev
     - libssh-gcrypt-4
     - libssl1.1
+    - libssl-dev 
+    - openssl
     - libstdc++6
     - libswresample3
     - libsystemd0
