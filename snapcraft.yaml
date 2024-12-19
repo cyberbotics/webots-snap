@@ -105,6 +105,7 @@ parts:
       sudo apt install --yes xvfb
       python3 -m pip install aqtinstall
       pip3 install distro
+      sudo apt install python3-distro
     override-prime: |
       craftctl default
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
