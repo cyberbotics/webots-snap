@@ -104,6 +104,7 @@ parts:
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
       python3 -m pip install aqtinstall
+      pip3 install distro
     override-prime: |
       craftctl default
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
