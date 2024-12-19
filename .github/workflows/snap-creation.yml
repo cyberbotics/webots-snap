@@ -1,16 +1,5 @@
 name: Webots Snap Package Creation
 on:
-  workflow_dispatch:
-    inputs:
-      debug_enabled:
-        type: boolean
-        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
-        required: false
-        default: false
-      branch:
-        description: "Branch to build"
-        required: false
-        default: "master"
   pull_request:
     types: [opened, synchronize, reopened, labeled, unlabeled]
   schedule:
@@ -29,11 +18,11 @@ defaults:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
+    if: ${{ github.event_name == 'schedule' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
     strategy:
       matrix:
         branch: [master, develop]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: Install Snapcraft
@@ -42,6 +31,7 @@ jobs:
       run: |
         sudo apt install --yes git
         sudo snap install snapcraft --classic
+        export ROS_DISTRO=noetic
         git clone --recurse-submodules --depth 3 --single-branch --branch ${{ matrix.branch }} https://github.com/cyberbotics/webots.git
         export WEBOTS_VERSION=$(cat webots/scripts/packaging/webots_version.txt | sed 's/ revision /-rev/g')
         sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml
@@ -54,16 +44,12 @@ jobs:
         sudo apt install xvfb
         export DISPLAY=:99
         Xvfb :99 -screen 0 1024x768x16 &
-    - name: Start tmate session (Debugging)
-      if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
-      uses: mxschmitt/action-tmate@v3
     - name: Create Snap Package
       run: |
-        sudo lsb_release -a
         sudo snapcraft --destructive-mode
         cp *.snap webots/distribution
-    - uses: actions/upload-artifact@v4
-      if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') || github.event_name == 'workflow_dispatch'}}
+    - uses: actions/upload-artifact@v2
+      if: ${{ contains(github.event.pull_request.labels.*.name, 'test creation') }}
       with:
         name: build-${{ matrix.branch }}
         path: |
@@ -78,7 +64,7 @@ jobs:
         webots/scripts/packaging/publish_release.py --key=${{ secrets.BOT_ACTION_KEY }} --repo=cyberbotics/webots --commit=$COMMIT_ID
   release-tag:
     if: ${{ github.event_name == 'push' }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: Install Snapcraft
@@ -87,6 +73,7 @@ jobs:
       run: |
         sudo apt install --yes git
         sudo snap install snapcraft --classic
+        export ROS_DISTRO=noetic
         git clone --recurse-submodules --depth 3 --single-branch --branch ${GITHUB_REF#refs/tags/} https://github.com/cyberbotics/webots.git
         export WEBOTS_VERSION=$(cat webots/scripts/packaging/webots_version.txt | sed 's/ revision /-rev/g')
         sed -i "s/version:\s*'R[0-9]\{4\}[a-z].*'/version: '$WEBOTS_VERSION'/g" snapcraft.yaml

@@ -11,9 +11,8 @@
 
 name: webots
 title: Webots
-base: core22
-version: 'R2025a'
-adopt-info: webots
+base: core20
+version: 'R2023b'
 summary: Webots is a free and open-source 3D robot simulator
 description: |
   Webots is a free and open-source 3D robot simulator.
@@ -22,17 +21,17 @@ description: |
   actuators and objects are provided, but you can create your own. Collision
   detections, rigid body dynamics and fluid dynamics rely on a modified version
   of the ODE physics engine. The robot controller programs can be written
-  outside of Webots in C, C++, Python, Java or MATLAB using a simple API.
+  outside of Webots in C, C++, Python, ROS, Java or MATLAB using a simple API.
   Webots features a 3D web interface allowing you to publish simulations online.
 icon: webots.png
 license: Apache-2.0
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
 architectures:
-- build-on: [amd64]
-  build-for: [amd64]
+- build-on: amd64
+  run-on: amd64
 environment:
-  JAVA_HOME: "$SNAP/usr/lib/jvm/java-18-openjdk-amd64"
+  JAVA_HOME: "$SNAP/usr/lib/jvm/java-16-openjdk-amd64"
   PATH: "$JAVA_HOME/bin:$PATH"
 
 layout:
@@ -42,10 +41,8 @@ layout:
     bind: $SNAP/usr/include
   /usr/share/libdrm:  # to fix a warning displayed by Webots on AMD GPUs
     bind: $SNAP/usr/share/libdrm
-  /usr/lib/$CRAFT_ARCH_TRIPLET/libc_nonshared.a:
-    bind-file: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/libc_nonshared.a
-    # bind-file: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a
-
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a:
+    bind-file: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a
 
 parts:
   desktop-gtk3:
@@ -61,7 +58,7 @@ parts:
     stage:
     - -usr/lib/x86_64-linux-gnu/libjpeg.so.8.2.2
     stage-packages:
-    - fonts-ubuntu
+    - ttf-ubuntu-font-family
     - dmz-cursor-theme
     - light-themes
     - adwaita-icon-theme
@@ -86,7 +83,8 @@ parts:
     plugin: make
     build-environment:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
-    - JAVA_HOME: "/usr/lib/jvm/java-18-openjdk-amd64"
+    - ROS_DISTRO: "noetic"
+    - JAVA_HOME: "/usr/lib/jvm/java-16-openjdk-amd64"
     - PATH: "$JAVA_HOME/bin:$PATH"
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
@@ -100,14 +98,15 @@ parts:
     # We should specify either the source-branch or the source-tag, but not both
     # source-tag: R2023b
     override-pull: |
-      craftctl default
+      snapcraftctl pull
       ./scripts/install/linux_optional_compilation_dependencies.sh
       sudo apt install --yes xvfb
+      snapcraftctl set-version R2023b
     override-prime: |
-      craftctl default
+      snapcraftctl prime
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
     stage-packages:
-    - openjdk-18-jdk
+    - openjdk-16-jdk
     - ca-certificates-java
     - build-essential
     - libc6-dev
@@ -122,6 +121,7 @@ parts:
     - libcanberra-gtk-module
     - libcanberra-gtk3-module
     - libccd2
+    - libcrystalhd3
     - libcurl3-gnutls
     - libdbus-1-3
     - libdouble-conversion3
@@ -131,7 +131,7 @@ parts:
     - libgcc1
     - libgcrypt20
     - libgd3
-    - libgfortran5
+    - libgfortran4
     - libglib2.0-0
     - libgl1
     - libglu1-mesa
@@ -146,10 +146,10 @@ parts:
     - libheimbase1-heimdal
     - libheimntlm0-heimdal
     - libhx509-5-heimdal
-    - libicu70
+    - libicu66
     - libjpeg8-dev
     - libkrb5-26-heimdal
-    - libldap-2.5-0
+    - libldap-2.4-2
     - libltdl7
     - liblzma5
     - libminizip1
@@ -176,7 +176,7 @@ parts:
     - libspeex1
     - libssh-dev
     - libssh-gcrypt-4
-    - libssl3
+    - libssl1.1
     - libstdc++6
     - libswresample3
     - libsystemd0
@@ -195,9 +195,8 @@ parts:
     - libwind0-heimdal
     - libx11-data
     - libx11-xcb1
-    - libx265-199
+    - libx265-179
     - libxaw7
-    - libxcb-cursor0
     - libxcb-glx0
     - libxcb-icccm4
     - libxcb-image0
@@ -229,6 +228,7 @@ parts:
 
 apps:
   webots:
+    extensions: [gnome-3-38]
     environment:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
