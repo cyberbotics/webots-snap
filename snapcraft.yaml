@@ -70,7 +70,6 @@ parts:
     - libgtk-3-0
     - libgdk-pixbuf2.0-0
     - libglib2.0-bin
-    - libgtk2.0-0
     - libgtk-3-bin
     - unity-gtk3-module
     - libappindicator3-1
@@ -123,7 +122,6 @@ parts:
     - libatk1.0-0
     - libavutil56
     - libblkid1
-    - libcanberra-gtk-module
     - libcanberra-gtk3-module
     - libccd2
     - libcurl3-gnutls
