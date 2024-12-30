@@ -226,6 +226,7 @@ parts:
     - lsb-release
     - util-linux
     - zlib1g
+    - libxcb-cursor0
 
 apps:
   webots:
