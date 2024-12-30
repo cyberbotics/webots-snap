@@ -50,14 +50,26 @@ layout:
 parts:
   desktop-gtk3:
     plugin: nil
-    stage-packages:
-      - libgtk-3-0
-      - libgdk-pixbuf2.0-0
-      - shared-mime-info
-      - libglib2.0-bin
-      - libgtk-3-bin
-      - libgtk-3-common
-      - libcanberra-gtk3-module
+    stage-packages: [gtk-3-examples, libglib2.0-bin]
+    after: [desktop-gnome-platform]
+
+  # This part installs the `desktop-launch` script which initialises desktop
+  # features such as fonts, themes and the XDG environment.
+  # 
+  # It is copied straight from the snapcraft desktop helpers project. Please
+  # periodically check the source for updates and copy the changes.
+  #    https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
+  # 
+  desktop-gnome-platform:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    plugin: make
+    make-parameters: ["FLAVOR=gtk3"]
+    build-packages:
+      - gcc
+    override-build: |
+      snapcraftctl build
+      mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
 
   webots:
     build-packages:
