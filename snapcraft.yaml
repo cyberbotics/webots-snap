@@ -57,6 +57,11 @@ parts:
     - WEBOTS_HOME: "$SNAPCRAFT_PART_BUILD"
     - JAVA_HOME: "/usr/lib/jvm/java-18-openjdk-amd64"
     - PATH: "$JAVA_HOME/bin:$PATH"
+    stage:
+      - -usr/lib/x86_64-linux-gnu/libGL.so.1
+      - -usr/lib/x86_64-linux-gnu/libGLX.so.0
+      - -usr/lib/x86_64-linux-gnu/libEGL.so.1
+      - -usr/lib/x86_64-linux-gnu/dri/*
     #source: https://cyberbotics.com/files/repository/beta/webots.tar.bz2
     # When building locally, uncomment the following line:
     source-type: local
@@ -105,8 +110,6 @@ parts:
     - libgd3
     - libgfortran5
     - libglib2.0-0
-    - libgl1
-    - libglu1-mesa
     - libglvnd0
     - libglx0
     - libgpg-error0
@@ -200,8 +203,6 @@ parts:
     - zlib1g
     - libfontconfig1-dev
     - xclip
-    - mesa-vulkan-drivers
-    - libgl1-mesa-dri
 
 apps:
   webots:
@@ -210,8 +211,8 @@ apps:
     environment:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
-      DISABLE_WAYLAND: 1
       GTK_USE_PORTAL: '1'
+      LD_LIBRARY_PATH: /usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
     plugs:
       - network
       - home
