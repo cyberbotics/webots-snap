@@ -236,25 +236,11 @@ apps:
       LD_LIBRARY_PATH: /usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
       LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/lib:$SNAP/usr/lib:$LD_LIBRARY_PATH
     plugs:
-      desktop:
-          mount-host-font-cache: false
-      gtk-3-themes:
-          interface: content
-          target: $SNAP/data-dir/themes
-          default-provider: gtk-common-themes
-      icon-themes:
-          interface: content
-          target: $SNAP/data-dir/icons
-          default-provider: gtk-common-themes
-      sound-themes:
-          interface: content
-          target: $SNAP/data-dir/sounds
-          default-provider: gtk-common-themes
-      gnome-42-2204:
-          interface: content
-          target: $SNAP/gnome-platform
-          default-provider: gnome-42-2204
-    plugs:
+      - desktop
+      - gtk-3-themes
+      - icon-themes
+      - sound-themes
+      - gnome-42-2204
       - network
       - home
       - gsettings
@@ -266,3 +252,21 @@ apps:
       - hostname-control
       - joystick
       - unity7
+
+plugs:
+gtk-3-themes:
+  interface: content
+  target: $SNAP/data-dir/themes
+  default-provider: gtk-common-themes
+icon-themes:
+  interface: content
+  target: $SNAP/data-dir/icons
+  default-provider: gtk-common-themes
+sound-themes:
+  interface: content
+  target: $SNAP/data-dir/sounds
+  default-provider: gtk-common-themes
+gnome-42-2204:
+  interface: content
+  target: $SNAP/gnome-platform
+  default-provider: gnome-42-2204
