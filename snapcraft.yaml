@@ -105,6 +105,10 @@ parts:
       rm -f usr/lib/x86_64-linux-gnu/libGLX.so*
       rm -f usr/lib/x86_64-linux-gnu/libEGL.so*
       rm -f usr/lib/x86_64-linux-gnu/dri/*
+      rm -rf usr/lib/x86_64-linux-gnu/gtk-2.0
+      rm -rf usr/lib/x86_64-linux-gnu/libgtk2.0-0
+      rm -f usr/lib/x86_64-linux-gnu/libgtk-x11-2.0.so*
+      rm -f usr/lib/x86_64-linux-gnu/libgdk-x11-2.0.so*
     stage-packages:
     - lsb-release
     - openjdk-18-jdk
