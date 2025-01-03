@@ -234,7 +234,7 @@ apps:
       SNAP_DESKTOP_RUNTIME: $SNAP/gnome-platform
       GTK_USE_PORTAL: '1'
       LD_LIBRARY_PATH: /usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
-      LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/lib:$SNAP/usr/lib:$LD_LIBRARY_PATH
+      # LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/lib:$SNAP/usr/lib:$LD_LIBRARY_PATH
     plugs:
       - desktop
       - gtk-3-themes
