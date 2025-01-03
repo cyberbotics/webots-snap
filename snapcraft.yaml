@@ -52,8 +52,6 @@ layout:
     bind: $SNAP/etc/openal
   /usr/include:  # to allow gcc compiler to find system include files
     bind: $SNAP/usr/include
-  /usr/share/libdrm:  # to fix a warning displayed by Webots on AMD GPUs
-    bind: $SNAP/usr/share/libdrm
   /usr/lib/$CRAFT_ARCH_TRIPLET/libc_nonshared.a:
     bind-file: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/libc_nonshared.a
     # bind-file: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a
