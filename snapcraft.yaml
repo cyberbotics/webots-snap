@@ -36,6 +36,18 @@ environment:
   PATH: "$JAVA_HOME/bin:$PATH"
 
 layout:
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libgweather-4:
+    symlink: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libgweather-4
+  /usr/lib/evolution-data-server:
+    symlink: $SNAP/usr/lib/evolution-data-server
+  /usr/bin/gnome-control-center:
+    symlink: $SNAP/usr/bin/gnome-control-center
+  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/webkit2gtk-4.0:
+    bind: $SNAP/gnome-platform/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/webkit2gtk-4.0
+  /usr/share/xml/iso-codes:
+    bind: $SNAP/gnome-platform/usr/share/xml/iso-codes
+  /usr/share/libdrm:
+    bind: $SNAP/gnome-platform/usr/share/libdrm
   /etc/openal: # to allow openal to read its global configuration file
     bind: $SNAP/etc/openal
   /usr/include:  # to allow gcc compiler to find system include files
@@ -221,8 +233,29 @@ apps:
     environment:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
+      SNAP_DESKTOP_RUNTIME: $SNAP/gnome-platform
       GTK_USE_PORTAL: '1'
       LD_LIBRARY_PATH: /usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+      LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/lib:$SNAP/usr/lib:$LD_LIBRARY_PATH
+    plugs:
+      desktop:
+          mount-host-font-cache: false
+      gtk-3-themes:
+          interface: content
+          target: $SNAP/data-dir/themes
+          default-provider: gtk-common-themes
+      icon-themes:
+          interface: content
+          target: $SNAP/data-dir/icons
+          default-provider: gtk-common-themes
+      sound-themes:
+          interface: content
+          target: $SNAP/data-dir/sounds
+          default-provider: gtk-common-themes
+      gnome-42-2204:
+          interface: content
+          target: $SNAP/gnome-platform
+          default-provider: gnome-42-2204
     plugs:
       - network
       - home
