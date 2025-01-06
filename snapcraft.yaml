@@ -233,7 +233,7 @@ parts:
     - util-linux
     - zlib1g
     - libgdk-pixbuf2.0-0
-    - gdk-pixbuf-loader-rsvg
+    - librsvg2-common
     - gdk-pixbuf2.0-bin
 
 apps:
