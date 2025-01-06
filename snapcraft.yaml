@@ -78,7 +78,6 @@ parts:
     - ibus-gtk3
     - libibus-1.0-5
     - fcitx-frontend-gtk3
-    - shared-mime-info
     - adwaita-icon-theme-full
     - libgdk-pixbuf2.0-bin
 
@@ -110,6 +109,9 @@ parts:
       craftctl default
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
       update-mime-database $SNAP/usr/share/mime
+      if [ -d "$SNAPCRAFT_PRIME/usr/share/mime/packages" ]; then
+        update-mime-database $SNAPCRAFT_PRIME/usr/share/mime
+      fi
       mkdir -p $SNAPCRAFT_PRIME/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0
       gdk-pixbuf-query-loaders > $SNAPCRAFT_PRIME/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders.cache
     stage-packages:
@@ -234,6 +236,7 @@ parts:
     - zlib1g
     - libgdk-pixbuf2.0-0
     - librsvg2-common
+    - shared-mime-info
 
 apps:
   webots:
