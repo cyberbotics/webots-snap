@@ -234,7 +234,7 @@ parts:
     - zlib1g
     - libgdk-pixbuf2.0-0
     - gdk-pixbuf-loader-rsvg
-    - gdk-pixbuf-query-loaders
+    - gdk-pixbuf2.0-bin
 
 apps:
   webots:
