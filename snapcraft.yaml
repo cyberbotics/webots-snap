@@ -112,7 +112,6 @@ parts:
         update-mime-database $SNAPCRAFT_PRIME/usr/share/mime
       fi
       mkdir -p $SNAPCRAFT_PRIME/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0
-      gdk-pixbuf-query-loaders > $SNAPCRAFT_PRIME/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders.cache
     stage-packages:
     - openjdk-18-jdk
     - ca-certificates-java
