@@ -109,6 +109,16 @@ parts:
       rm -rf usr/lib/x86_64-linux-gnu/libgtk2.0-0
       rm -f usr/lib/x86_64-linux-gnu/libgtk-x11-2.0.so*
       rm -f usr/lib/x86_64-linux-gnu/libgdk-x11-2.0.so*
+      rm -rf usr/lib/x86_64-linux-gnu/glib-2.0
+      rm -rf usr/share/glib-2.0
+      rm -f stage/usr/lib/x86_64-linux-gnu/libGL.so*
+      rm -f stage/usr/lib/x86_64-linux-gnu/libGLX.so*
+      rm -f stage/usr/lib/x86_64-linux-gnu/libEGL.so*
+      rm -f stage/usr/lib/x86_64-linux-gnu/dri/*
+      rm -rf stage/usr/lib/x86_64-linux-gnu/gtk-2.0
+      rm -rf stage/usr/lib/x86_64-linux-gnu/libgtk2.0-0
+      rm -f stage/usr/lib/x86_64-linux-gnu/libgtk-x11-2.0.so*
+      rm -f stage/usr/lib/x86_64-linux-gnu/libgdk-x11-2.0.so*
     stage-packages:
     - lsb-release
     - openjdk-18-jdk
