@@ -242,6 +242,7 @@ apps:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
       DISABLE_WAYLAND: 1
+      PATH: $SNAP/usr/bin:$PATH
     plugs:
       - audio-playback
       - browser-support
