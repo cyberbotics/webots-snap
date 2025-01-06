@@ -108,7 +108,6 @@ parts:
     override-prime: |
       craftctl default
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
-      update-mime-database $SNAP/usr/share/mime
       if [ -d "$SNAPCRAFT_PRIME/usr/share/mime/packages" ]; then
         update-mime-database $SNAPCRAFT_PRIME/usr/share/mime
       fi
