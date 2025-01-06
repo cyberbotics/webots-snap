@@ -234,7 +234,6 @@ parts:
     - zlib1g
     - libgdk-pixbuf2.0-0
     - librsvg2-common
-    - gdk-pixbuf2.0-bin
 
 apps:
   webots:
