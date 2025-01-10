@@ -44,6 +44,8 @@ layout:
     bind: $SNAP/usr/share/libdrm
   /usr/lib/$CRAFT_ARCH_TRIPLET/libc_nonshared.a:
     bind-file: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/libc_nonshared.a
+  /usr/lib/x86_64-linux-gnu/libblas.so.3:
+    bind-file: $SNAP/usr/lib/x86_64-linux-gnu/blas/libblas.so.3
     # bind-file: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libc_nonshared.a
 
 
@@ -252,6 +254,7 @@ apps:
       LC_ALL: C.UTF-8
       DISABLE_WAYLAND: 1
       PATH: $SNAP/usr/bin:$PATH
+      LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu/blas:$LD_LIBRARY_PATH
     plugs:
       - audio-playback
       - browser-support
