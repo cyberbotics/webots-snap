@@ -126,6 +126,7 @@ parts:
     - libc6-dev
     - ffmpeg
     - libavcodec-extra
+    - libblas3
     - freeglut3-dev
     - libaribb24-0
     - libasn1-8-heimdal
