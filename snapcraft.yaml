@@ -252,7 +252,7 @@ apps:
       LC_ALL: C.UTF-8
       DISABLE_WAYLAND: 1
       PATH: $SNAP/usr/bin:$PATH
-      LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu/blas:$LD_LIBRARY_PATH
+      LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu/blas:$SNAP/usr/lib/x86_64-linux-gnu/lapack:$LD_LIBRARY_PATH
     plugs:
       - audio-playback
       - browser-support
