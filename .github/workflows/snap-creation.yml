@@ -32,7 +32,7 @@ jobs:
     if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
     strategy:
       matrix:
-        branch: [fix-test-suite-ubuntu24.04]
+        branch: [develop]
         # it should target a branch that this lines are added to qt_linux_installer.sh
         # pip install --no-input aqtinstall
         # export PATH="$PATH:$HOME/.local/bin"
