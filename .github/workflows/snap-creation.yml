@@ -32,14 +32,7 @@ jobs:
     if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'test creation') }}
     strategy:
       matrix:
-        branch: [develop]
-        # it should target a branch that this lines are added to qt_linux_installer.sh
-        # pip install --no-input aqtinstall
-        # export PATH="$PATH:$HOME/.local/bin"
-        # sudo apt update
-        # sudo apt install -y lsb-release python3-distro
-        # sudo apt install python3-distro
-        # pip3 install distro
+        branch: [master, develop]
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
