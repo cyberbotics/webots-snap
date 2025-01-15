@@ -104,13 +104,8 @@ parts:
     override-pull: |
       craftctl default
       ./scripts/install/linux_optional_compilation_dependencies.sh
-      ./scripts/install/linux_runtime_dependencies.sh
       pip3 install --no-input aqtinstall
       export PATH="$PATH:$HOME/.local/bin"
-      sudo apt update
-      sudo apt install -y lsb-release python3-distro
-      sudo apt install python3-distro
-      pip3 install distro
       sudo apt install --yes xvfb
     override-prime: |
       craftctl default
