@@ -78,6 +78,8 @@ parts:
     - ibus-gtk3
     - libibus-1.0-5
     - fcitx-frontend-gtk3
+    - adwaita-icon-theme-full
+    - libgdk-pixbuf2.0-bin
 
   webots:
     build-packages:
@@ -102,16 +104,24 @@ parts:
     override-pull: |
       craftctl default
       ./scripts/install/linux_optional_compilation_dependencies.sh
+      pip3 install --no-input aqtinstall
+      export PATH="$PATH:$HOME/.local/bin"
       sudo apt install --yes xvfb
     override-prime: |
       craftctl default
       rm -vf usr/lib/jvm/java-11-openjdk-*amd64/lib/security/blacklisted.certs
+      if [ -d "$SNAPCRAFT_PRIME/usr/share/mime/packages" ]; then
+        update-mime-database $SNAPCRAFT_PRIME/usr/share/mime
+      fi
+      mkdir -p $SNAPCRAFT_PRIME/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0
     stage-packages:
     - openjdk-18-jdk
     - ca-certificates-java
     - build-essential
     - libc6-dev
     - ffmpeg
+    - libavcodec-extra
+    - libblas3
     - freeglut3-dev
     - libaribb24-0
     - libasn1-8-heimdal
@@ -226,6 +236,9 @@ parts:
     - lsb-release
     - util-linux
     - zlib1g
+    - libgdk-pixbuf2.0-0
+    - librsvg2-common
+    - shared-mime-info
 
 apps:
   webots:
@@ -233,6 +246,8 @@ apps:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
       DISABLE_WAYLAND: 1
+      PATH: $SNAP/usr/bin:$PATH
+      LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu/blas:$SNAP/usr/lib/x86_64-linux-gnu/lapack:$LD_LIBRARY_PATH
     plugs:
       - audio-playback
       - browser-support
@@ -243,6 +258,8 @@ apps:
       - joystick
       - network
       - unity7
+      - opengl
+      - removable-media
     desktop: usr/share/webots/resources/webots.desktop
     command-chain:
       - bin/desktop-launch
